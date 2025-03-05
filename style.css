@@ -1,0 +1,96 @@
+body {
+    background-color: #000;
+    margin: 0;
+    padding: 20px;
+}
+
+.terminal {
+    background-color: #000;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    border: 1px solid #00ff00;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.terminal-header {
+    background-color: #333;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.close {
+    background-color: #ff5f56;
+}
+
+.minimize {
+    background-color: #ffbd2e;
+}
+
+.maximize {
+    background-color: #27c93f;
+}
+
+.title {
+    color: #fff;
+    margin-left: 10px;
+}
+
+.terminal-body {
+    padding: 10px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 2em;
+    margin: 0;
+}
+
+header p {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+section h2 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+section h3 {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+section p, section ul {
+    margin: 10px 0;
+}
+
+a {
+    color: #00ff00;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #ffffff;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+}
