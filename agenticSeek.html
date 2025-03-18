@@ -1,159 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>AgenticSeek - Local AI Assistant</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AgenticSeek: A privacy-first, local AI assistant powered by Deepseek R1. Code, explore files, and interact via voice without cloud data sharing.">
-    <meta name="keywords" content="AgenticSeek, local AI, Deepseek R1, privacy-first AI, voice assistant, coding AI, filesystem AI, open-source AI">
-    <meta name="author" content="Fosowl, steveh8758">
-    <meta name="robots" content="index, follow">
+    <title>AgenticSeek - Local AI Assistant</title>
     <style>
         body {
-            font-family: 'Courier New', monospace;
-            background-color: #1a1a1a;
-            color: #00ff00;
+            font-family: Arial, sans-serif;
             margin: 0;
+            padding: 0;
+            background-color: #F5F6F5; /* SF fog light gray */
+            color: #2E2E2E; /* Dark gray text */
+        }
+        header {
+            background-color: #1A3C5E; /* Ocean blue */
+            color: white;
             padding: 20px;
-            line-height: 1.6;
+            text-align: center;
+        }
+        nav {
+            background-color: #D94F30; /* Golden Gate red-orange */
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        nav a:hover {
+            text-decoration: underline;
         }
         .container {
             max-width: 800px;
-            margin: 0 auto;
-            background-color: #2a2a2a;
+            margin: 20px auto;
             padding: 20px;
-            border: 1px solid #00ff00;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         h1 {
-            color: #00cc00;
-            border-bottom: 2px dashed #00ff00;
-            padding-bottom: 10px;
+            margin: 0;
+            font-size: 2.5em;
         }
         h2 {
-            color: #00cc00;
+            color: #1A3C5E;
+        }
+        h3 {
+            color: #D94F30;
+        }
+        .features {
+            background-color: #E8ECEF; /* Light fog gray */
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .features ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .features li {
+            margin: 10px 0;
         }
         pre {
-            background-color: #1a1a1a;
+            background-color: #E8ECEF;
             padding: 10px;
-            border: 1px solid #00ff00;
+            border-radius: 5px;
             overflow-x: auto;
         }
-        a {
-            color: #00ff00;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .badge {
-            background-color: #006600;
-            padding: 2px 8px;
-            margin: 0 5px;
-            display: inline-block;
-        }
-        .table {
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1A3C5E;
+            color: white;
+            position: fixed;
+            bottom: 0;
             width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
         }
-        .table th, .table td {
-            border: 1px solid #00ff00;
-            padding: 8px;
-            text-align: left;
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #D94F30;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
         }
-        .table th {
-            background-color: #006600;
+        .button:hover {
+            background-color: #B84228;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>AgenticSeek</h1>
+        <p>Manus-like AI Powered by DeepSeek R1 Agents</p>
+    </header>
+    <nav>
+        <a href="#features">Features</a>
+        <a href="#installation">Installation</a>
+        <a href="#contribute">Contribute</a>
+        <a href="https://github.com/Fosowl/agenticSeek">GitHub</a>
+    </nav>
     <div class="container">
-        <h1><a href="https://github.com/Fosowl/agenticSeek">AgenticSeek</a>: Danus-like AI powered by Deepseek R1 Agents</a></h1>
-        <p><strong>A fully local alternative to Manus AI</strong> - Discover a voice-enabled AI assistant that codes, navigates your filesystem, and prioritizes privacy, all running locally with Deepseek R1.</p>
-        <p>
-            <a href="https://github.com/Fosowl/agenticSeek" class="badge">GitHub</a>
-            <a href="https://github.com/Fosowl/agenticSeek/issues" class="badge">GitHub Issues</a>
-            <a href="#" class="badge">Join Discord</a>
-            <span class="badge">GPL-3.0 License</span>
-        </p>
-        <h2>Features</h2>
-        <ul>
-            <li><strong>Privacy-first:</strong> Runs 100% locally</li>
-            <li><strong>Voice-enabled:</strong> Natural speech interaction</li>
-            <li><strong>Filesystem:</strong> Bash filesystem interaction</li>
-            <li><strong>Coding:</strong> Code in Python, C, Golang</li>
-            <li><strong>Trial-and-error:</strong> Autonomous, fixes it's mistakes and explore the web</li>
-            <li><strong>Multi-agent:</strong> Task division with agents</li>
-            <li><strong>Tools:</strong> Search, file explorer, api, etc...</li>
-            <li><strong>Memory:</strong> Retains useful context, remembers previous conversations</li>
-        </ul>
-
-        <h2>Run Locally</h2>
-        <p><strong>Recommended:</strong> Deepseek 14B minimum</p>
+        <p><strong>A fully local alternative to Manus AI</strong> – a voice-enabled AI assistant that codes, explores your filesystem, browses the web, and corrects its mistakes, all without sending a byte of data to the cloud.</p>
         
-        <h3>1. Install Dependencies</h3>
-        <pre>pip3 install -r requirements.txt</pre>
+        <div id="features" class="features">
+            <h2>Features</h2>
+            <ul>
+                <li><strong>100% Local:</strong> Runs on your hardware, keeping your data private.</li>
+                <li><strong>Voice Interaction:</strong> Natural voice-enabled interaction.</li>
+                <li><strong>Filesystem:</strong> Navigate and manipulate files with bash.</li>
+                <li><strong>Coding:</strong> Write, debug, and run code in Python, C, Go, and more.</li>
+                <li><strong>Autonomous:</strong> Retries and fixes broken commands or code.</li>
+                <li><strong>Web Browsing:</strong> Autonomous web navigation (in progress).</li>
+                <li><strong>Memory:</strong> Remembers preferences and past sessions.</li>
+            </ul>
+        </div>
 
-        <h3>2. Download Models</h3>
-        <p>Install <a href="https://ollama.com/">Ollama</a> and pull:</p>
-        <pre>ollama pull deepseek-r1:7b</pre>
+        <div id="installation">
+            <h2>Installation</h2>
+            <p>Make sure you have ChromeDriver and Docker installed.</p>
 
-        <h3>3. Run with Ollama</h3>
-        <pre>ollama serve</pre>
-        <p>Update config.ini:</p>
-        <pre>[MAIN]
+            <h3>Run Locally on Your Machine</h3>
+            <p><strong>Step 1: Clone the Repository</strong></p>
+            <pre>git clone https://github.com/Fosowl/agenticSeek.git
+cd agenticSeek
+mv .env.example .env</pre>
+            <p><strong>Step 2: Create a Virtual Environment</strong></p>
+            <pre>python3 -m venv agentic_seek_env
+source agentic_seek_env/bin/activate
+# On Windows: agentic_seek_env\Scripts\activate</pre>
+            <p><strong>Step 3: Install Package</strong></p>
+            <pre>./install.sh
+# Or manually: pip3 install -r requirements.txt</pre>
+            <p><strong>Step 4: Download Models</strong></p>
+            <pre>ollama pull deepseek-r1:7b</pre>
+            <p><strong>Step 5: Run the Assistant</strong></p>
+            <p>Start the Ollama server:</p>
+            <pre>ollama serve</pre>
+            <p>Update <code>config.ini</code>:</p>
+            <pre>[MAIN]
 is_local = True
 provider_name = ollama
 provider_model = deepseek-r1:7b</pre>
-        <pre>python3 main.py</pre>
+            <p>Start services and run:</p>
+            <pre>./start_services.sh
+python3 main.py</pre>
+            <p><em>Note: We recommend DeepSeek 14B or larger for better performance.</em></p>
 
-        <h2>Providers</h2>
-        <table class="table">
-            <tr>
-                <th>Provider</th>
-                <th>Local?</th>
-                <th>Description</th>
-            </tr>
-            <tr>
-                <td>Ollama</td>
-                <td>Yes</td>
-                <td>Run LLMs locally with ease</td>
-            </tr>
-            <tr>
-                <td>Server</td>
-                <td>Yes</td>
-                <td>Host on another machine</td>
-            </tr>
-            <tr>
-                <td>OpenAI</td>
-                <td>No</td>
-                <td>Use ChatGPT API</td>
-            </tr>
-            <tr>
-                <td>Deepseek</td>
-                <td>No</td>
-                <td>Deepseek API</td>
-            </tr>
-            <tr>
-                <td>HuggingFace</td>
-                <td>No</td>
-                <td>HuggingFace API</td>
-            </tr>
-        </table>
+            <h3>Run the LLM on Your Own Server</h3>
+            <p><strong>Step 1: Set Up the Server</strong></p>
+            <p>On your server, get the IP address:</p>
+            <pre>ip a | grep "inet " | grep -v 127.0.0.1 | awk '{print $2}' | cut -d/ -f1</pre>
+            <p>Clone and run the server script:</p>
+            <pre>python3 server_ollama.py</pre>
+            <p><strong>Step 2: Run on Your Computer</strong></p>
+            <p>Clone the repository, update <code>config.ini</code>:</p>
+            <pre>[MAIN]
+is_local = False
+provider_name = server
+provider_model = deepseek-r1:14b
+provider_server_address = x.x.x.x:5000</pre>
+            <p>Start services and run:</p>
+            <pre>./start_services.sh
+python3 main.py</pre>
 
-        <h2>FAQ</h2>
-        <p><strong>Q: What hardware do I need?</strong><br>
-        7B: 8GB VRAM | 14B: 12GB VRAM | 32B: 24GB+ VRAM</p>
-        <p><strong>Q: Why Deepseek R1?</strong><br>
-        Excels at reasoning and tool use for its size</p>
-        <p><strong>Q: Can it run 100% locally?</strong><br>
-        Yes, with Ollama or Server providers</p>
+            <h3>Run with an API</h3>
+            <p>Clone the repository, update <code>config.ini</code>:</p>
+            <pre>[MAIN]
+is_local = False
+provider_name = openai
+provider_model = gpt4-o
+provider_server_address = 127.0.0.1:5000</pre>
+            <p>Start services and run:</p>
+            <pre>./start_services.sh
+python3 main.py</pre>
+        </div>
 
-        <h2>Authors</h2>
-        <p>
-            <a href="https://github.com/Fosowl">Fosowl</a> |
-            <a href="https://github.com/steveh8758">steveh8758</a>
-        </p>
+        <div id="contribute">
+            <h2>Contribute</h2>
+            <p>We’re looking for developers to improve AgenticSeek! Check out open issues on GitHub.</p>
+            <p><strong>License:</strong> GPL-3.0</p>
+            <a href="https://github.com/Fosowl/agenticSeek" class="button">Join Us</a>
+        </div>
     </div>
+    <footer>
+        <p>© 2025 AgenticSeek | Built by <a href="https://github.com/Fosowl">Fosowl</a> & <a href="https://github.com/steveh8758">steveh8758</a></p>
+    </footer>
 </body>
 </html>
