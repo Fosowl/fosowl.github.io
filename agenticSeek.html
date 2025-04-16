@@ -97,90 +97,161 @@
     <nav>
         <a href="#features">Features</a>
         <a href="#installation">Installation</a>
+        <a href="#usage">Usage</a>
         <a href="#contribute">Contribute</a>
         <a href="https://github.com/Fosowl/agenticSeek">GitHub</a>
+        <a href="https://discord.gg/4Ub2D6Fj">Discord</a>
+        <a href="https://x.com/Martin993886460">X</a>
     </nav>
     <div class="container">
-        <p><strong>A fully local alternative to Manus AI</strong> – a voice-enabled AI assistant that codes, explores your filesystem, browses the web, and corrects its mistakes, all without sending a byte of data to the cloud.</p>
+        <p><strong>A fully local alternative to Manus AI</strong> – a voice-enabled AI assistant that codes, explores your filesystem, browses the web, and corrects its mistakes, all without sending a byte of data to the cloud. Built with reasoning models like DeepSeek R1, this autonomous agent runs entirely on your hardware, keeping your data private.</p>
         
         <div id="features" class="features">
             <h2>Features</h2>
             <ul>
-                <li><strong>100% Local:</strong> Runs on your hardware, keeping your data private.</li>
-                <li><strong>Voice Interaction:</strong> Natural voice-enabled interaction.</li>
-                <li><strong>Filesystem:</strong> Navigate and manipulate files with bash.</li>
-                <li><strong>Coding:</strong> Write, debug, and run code in Python, C, Go, and more.</li>
-                <li><strong>Autonomous:</strong> Retries and fixes broken commands or code.</li>
-                <li><strong>Web Browsing:</strong> Autonomous web navigation (in progress).</li>
-                <li><strong>Memory:</strong> Remembers preferences and past sessions.</li>
+                <li><strong>100% Local:</strong> No cloud, runs on your hardware. Your data stays yours.</li>
+                <li><strong>Filesystem Interaction:</strong> Use bash to navigate and manipulate your files effortlessly.</li>
+                <li><strong>Autonomous Coding:</strong> Can write, debug, and run code in Python, C, Golang, and more languages on the way.</li>
+                <li><strong>Agent Routing:</strong> Automatically picks the right agent for the job.</li>
+                <li><strong>Planning:</strong> For complex tasks, spins up multiple agents to plan and execute.</li>
+                <li><strong>Autonomous Web Browsing:</strong> Autonomous web navigation.</li>
+                <li><strong>Memory:</strong> Efficient memory and sessions management.</li>
             </ul>
         </div>
 
         <div id="installation">
             <h2>Installation</h2>
-            <p>Make sure you have ChromeDriver and Docker installed.</p>
+            <p>Make sure you have ChromeDriver, Docker, and Python 3.10 (or newer) installed. For ChromeDriver issues, see the <a href="#known-issues">Known Issues</a> section.</p>
 
-            <h3>Run Locally on Your Machine</h3>
-            <p><strong>Step 1: Clone the Repository</strong></p>
+            <h3>Step 1: Clone the Repository</h3>
             <pre>git clone https://github.com/Fosowl/agenticSeek.git
 cd agenticSeek
 mv .env.example .env</pre>
-            <p><strong>Step 2: Create a Virtual Environment</strong></p>
+
+            <h3>Step 2: Create a Virtual Environment</h3>
             <pre>python3 -m venv agentic_seek_env
 source agentic_seek_env/bin/activate
 # On Windows: agentic_seek_env\Scripts\activate</pre>
-            <p><strong>Step 3: Install Package</strong></p>
-            <pre>./install.sh
-# Or manually: pip3 install -r requirements.txt</pre>
-            <p><strong>Step 4: Download Models</strong></p>
-            <pre>ollama pull deepseek-r1:7b</pre>
-            <p><strong>Step 5: Run the Assistant</strong></p>
+
+            <h3>Step 3: Install Package</h3>
+            <p><strong>Automatic Installation:</strong></p>
+            <pre>./install.sh</pre>
+            <p><strong>Manual Installation:</strong></p>
+            <pre>pip3 install -r requirements.txt
+# Or
+python3 setup.py install</pre>
+
+            <h3>Run Locally on Your Machine</h3>
+            <p><em>We recommend using at least DeepSeek 14B; smaller models will struggle with tasks, especially web browsing.</em></p>
+            <p><strong>Step 1: Download Models</strong></p>
+            <p>Make sure you have <a href="https://ollama.com/">Ollama</a> installed.</p>
+            <pre>ollama pull deepseek-r1:14b</pre>
+            <p><strong>Step 2: Run the Assistant (Ollama)</strong></p>
             <p>Start the Ollama server:</p>
             <pre>ollama serve</pre>
             <p>Update <code>config.ini</code>:</p>
             <pre>[MAIN]
 is_local = True
 provider_name = ollama
-provider_model = deepseek-r1:7b</pre>
+provider_model = deepseek-r1:14b
+provider_server_address = 127.0.0.1:11434</pre>
             <p>Start services and run:</p>
-            <pre>./start_services.sh
-python3 main.py</pre>
-            <p><em>Note: We recommend DeepSeek 14B or larger for better performance.</em></p>
+            <pre>sudo ./start_services.sh # On Windows: start ./start_services.cmd
+python3 cli.py</pre>
 
             <h3>Run the LLM on Your Own Server</h3>
             <p><strong>Step 1: Set Up the Server</strong></p>
             <p>On your server, get the IP address:</p>
             <pre>ip a | grep "inet " | grep -v 127.0.0.1 | awk '{print $2}' | cut -d/ -f1</pre>
-            <p>Clone and run the server script:</p>
-            <pre>python3 server_ollama.py</pre>
+            <p>Clone the repository and enter the <code>server/</code> folder:</p>
+            <pre>git clone --depth 1 https://github.com/Fosowl/agenticSeek.git
+cd agenticSeek/server/</pre>
+            <p>Install server-specific requirements:</p>
+            <pre>pip3 install -r requirements.txt</pre>
+            <p>Run the server script:</p>
+            <pre>python3 app.py --provider ollama --port 3333</pre>
             <p><strong>Step 2: Run on Your Computer</strong></p>
-            <p>Clone the repository, update <code>config.ini</code>:</p>
+            <p>Update <code>config.ini</code>:</p>
             <pre>[MAIN]
 is_local = False
 provider_name = server
 provider_model = deepseek-r1:14b
-provider_server_address = x.x.x.x:5000</pre>
+provider_server_address = x.x.x.x:3333</pre>
             <p>Start services and run:</p>
-            <pre>./start_services.sh
-python3 main.py</pre>
+            <pre>sudo ./start_services.sh # On Windows: start ./start_services.cmd
+python3 cli.py</pre>
 
             <h3>Run with an API</h3>
-            <p>Clone the repository, update <code>config.ini</code>:</p>
+            <p>Update <code>config.ini</code>:</p>
             <pre>[MAIN]
 is_local = False
 provider_name = openai
-provider_model = gpt4-o
+provider_model = gpt-4o
 provider_server_address = 127.0.0.1:5000</pre>
             <p>Start services and run:</p>
-            <pre>./start_services.sh
-python3 main.py</pre>
+            <pre>sudo ./start_services.sh # On Windows: start ./start_services.cmd
+python3 cli.py</pre>
+        </div>
+
+        <div id="usage">
+            <h2>Usage</h2>
+            <p>Ensure services are running with <code>./start_services.sh</code> and start AgenticSeek with <code>python3 cli.py</code>:</p>
+            <pre>sudo ./start_services.sh
+python3 cli.py</pre>
+            <p>You will see a prompt <code>>>> </code> indicating AgenticSeek is ready for instructions. You can also enable speech-to-text by setting <code>listen = True</code> in <code>config.ini</code>.</p>
+            <p>To exit, say or type <code>goodbye</code>.</p>
+            <h3>Example Usage</h3>
+            <p><strong>Coding/Bash:</strong></p>
+            <ul>
+                <li>Make a snake game in Python</li>
+                <li>Show me how to multiply matrices in C</li>
+                <li>Make a blackjack game in Golang</li>
+            </ul>
+            <p><strong>Web Search:</strong></p>
+            <ul>
+                <li>Do a web search to find cool tech startups in Japan working on cutting-edge AI research</li>
+                <li>Can you find on the internet who created AgenticSeek?</li>
+                <li>Can you use a fuel calculator online to estimate the cost of a Nice - Milan trip?</li>
+            </ul>
+            <p><strong>File System:</strong></p>
+            <ul>
+                <li>Hey, can you find where contract.pdf is? I lost it</li>
+                <li>Show me how much space I have left on my disk</li>
+                <li>Can you follow the readme and install a project at /home/path/project?</li>
+            </ul>
+            <p><strong>Casual:</strong></p>
+            <ul>
+                <li>Tell me about Rennes, France</li>
+                <li>Should I pursue a PhD?</li>
+                <li>What's the best workout routine?</li>
+            </ul>
+            <p><em>Note: Be explicit in your queries (e.g., specify "do a web search" for web tasks) as the agent routing system is still in early development.</em></p>
+
+            <h3>Speech to Text</h3>
+            <p>Enable speech-to-text by setting <code>listen = True</code> in <code>config.ini</code>:</p>
+            <pre>listen = True</pre>
+            <p>Set the agent's name (e.g., <code>Friday</code>) for voice activation:</p>
+            <pre>agent_name = Friday</pre>
+            <p>Say the agent's name to wake it, speak  speak your query clearly, and end with a confirmation phrase like <code>do it</code>, <code>go ahead</code>, or <code>proceed</code>.</p>
         </div>
 
         <div id="contribute">
             <h2>Contribute</h2>
-            <p>We’re looking for developers to improve AgenticSeek! Check out open issues on GitHub.</p>
+            <p>We’re looking for developers to improve AgenticSeek! Check out open issues or discussions on <a href="https://github.com/Fosowl/agenticSeek">GitHub</a>.</p>
             <p><strong>License:</strong> GPL-3.0</p>
+            <p><strong>Maintainers:</strong> <a href="https://github.com/Fosowl">Fosowl</a>, <a href="https://github.com/steveh8758">steveh8758</a></p>
             <a href="https://github.com/Fosowl/agenticSeek" class="button">Join Us</a>
+        </div>
+
+        <div id="known-issues">
+            <h2>Known Issues</h2>
+            <h3>Chromedriver Issues</h3>
+            <p><strong>Error:</strong> <code>session not created: This version of ChromeDriver only supports Chrome version 113</code></p>
+            <p>This occurs due to a mismatch between your browser and ChromeDriver version. Download the latest ChromeDriver from:</p>
+            <ul>
+                <li><a href="https://developer.chrome.com/docs/chromedriver/downloads">ChromeDriver Downloads</a> (for Chrome versions < 115)</li>
+                <li><a href="https://googlechromelabs.github.io/chrome-for-testing/">Chrome for Testing</a> (for Chrome versions ≥ 115)</li>
+            </ul>
         </div>
     </div>
     <footer>
