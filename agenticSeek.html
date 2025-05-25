@@ -3,259 +3,640 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgenticSeek - Local AI Assistant</title>
+    <title>AgenticSeek - Private AI Assistant</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #F5F6F5; /* SF fog light gray */
-            color: #2E2E2E; /* Dark gray text */
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
-        header {
-            background-color: #1A3C5E; /* Ocean blue */
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        nav {
-            background-color: #D94F30; /* Golden Gate red-orange */
-            padding: 10px;
-            text-align: center;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-        h2 {
-            color: #1A3C5E;
-        }
-        h3 {
-            color: #D94F30;
-        }
-        .features {
-            background-color: #E8ECEF; /* Light fog gray */
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .features ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .features li {
-            margin: 10px 0;
-        }
-        pre {
-            background-color: #E8ECEF;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #1A3C5E;
-            color: white;
+
+        /* Animated background grid */
+        .grid-bg {
             position: fixed;
-            bottom: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Glitch text effect */
+        .glitch {
+            position: relative;
+            animation: glitch 2s infinite;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            animation: glitch-1 0.5s infinite;
+            color: #ff0000;
+            z-index: -1;
+        }
+
+        .glitch::after {
+            animation: glitch-2 0.5s infinite;
+            color: #00ff00;
+            z-index: -2;
+        }
+
+        @keyframes glitch {
+            0%, 74%, 76%, 100% { transform: translate(0); }
+            75% { transform: translate(-2px, 2px); }
+        }
+
+        @keyframes glitch-1 {
+            0%, 74%, 76%, 100% { transform: translate(0); }
+            75% { transform: translate(2px, -2px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 74%, 76%, 100% { transform: translate(0); }
+            75% { transform: translate(-2px, -2px); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #333;
+            padding: 1rem 2rem;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #fff, #666);
+            transition: width 0.5s ease;
+        }
+
+        .logo:hover::after {
             width: 100%;
         }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #D94F30;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
         }
-        .button:hover {
-            background-color: #B84228;
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        /* Main content */
+        main {
+            margin-top: 80px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.1; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #888);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            margin-bottom: 2rem;
+            color: #ccc;
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .typing-text {
+            border-right: 2px solid #fff;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: 2px solid #fff;
+            background: transparent;
+            color: #fff;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary {
+            border-color: #666;
+            color: #ccc;
+        }
+
+        .btn-secondary:hover {
+            background: #666;
+            color: #fff;
+        }
+
+        /* Features section */
+        .features {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: #fff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .feature-card p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* Stats section */
+        .stats {
+            background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #ccc;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0,0,0,0.5);
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Terminal effect */
+        .terminal {
+            background: rgba(0,20,0,0.8);
+            border: 1px solid #00ff00;
+            padding: 1rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            position: relative;
+        }
+
+        .terminal::before {
+            content: '$ ';
+            color: #00ff00;
+        }
+
+        .terminal-text {
+            animation: typewriter 3s steps(40) infinite;
+        }
+
+        @keyframes typewriter {
+            0% { width: 0; }
+            50% { width: 100%; }
+            100% { width: 0; }
         }
     </style>
 </head>
 <body>
+    <div class="grid-bg"></div>
+    
     <header>
-        <h1>AgenticSeek</h1>
-        <p>Manus-like AI Powered by DeepSeek R1 Agents</p>
+        <nav>
+            <a href="#" class="logo">AgenticSeek</a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="https://github.com/Fosowl/agenticSeek" target="_blank">GitHub</a></li>
+                <li><a href="https://discord.gg/8hGDaME3TC" target="_blank">Discord</a></li>
+            </ul>
+        </nav>
     </header>
-    <nav>
-        <a href="#features">Features</a>
-        <a href="#installation">Installation</a>
-        <a href="#usage">Usage</a>
-        <a href="#contribute">Contribute</a>
-        <a href="https://github.com/Fosowl/agenticSeek">GitHub</a>
-        <a href="https://discord.gg/4Ub2D6Fj">Discord</a>
-        <a href="https://x.com/Martin993886460">X</a>
-    </nav>
-    <div class="container">
-        <p><strong>A fully local alternative to Manus AI</strong> – a voice-enabled AI assistant that codes, explores your filesystem, browses the web, and corrects its mistakes, all without sending a byte of data to the cloud. Built with reasoning models like DeepSeek R1, this autonomous agent runs entirely on your hardware, keeping your data private.</p>
-        
-        <div id="features" class="features">
-            <h2>Features</h2>
-            <ul>
-                <li><strong>100% Local:</strong> No cloud, runs on your hardware. Your data stays yours.</li>
-                <li><strong>Filesystem Interaction:</strong> Use bash to navigate and manipulate your files effortlessly.</li>
-                <li><strong>Autonomous Coding:</strong> Can write, debug, and run code in Python, C, Golang, and more languages on the way.</li>
-                <li><strong>Agent Routing:</strong> Automatically picks the right agent for the job.</li>
-                <li><strong>Planning:</strong> For complex tasks, spins up multiple agents to plan and execute.</li>
-                <li><strong>Autonomous Web Browsing:</strong> Autonomous web navigation.</li>
-                <li><strong>Memory:</strong> Efficient memory and sessions management.</li>
-            </ul>
-        </div>
 
-        <div id="installation">
-            <h2>Installation</h2>
-            <p>Make sure you have ChromeDriver, Docker, and Python 3.10 (or newer) installed. For ChromeDriver issues, see the <a href="#known-issues">Known Issues</a> section.</p>
+    <main>
+        <section class="hero">
+            <h1 class="glitch" data-text="AgenticSeek">AgenticSeek</h1>
+            <p class="subtitle">
+                Your <span class="typing-text">100% Private AI Assistant</span>
+            </p>
+            <p style="color: #999; max-width: 700px; margin-bottom: 2rem;">
+                A fully local alternative to Manus AI. Voice-enabled AI assistant that autonomously browses the web, writes code, and plans tasks while keeping all data on your device.
+            </p>
+            
 
-            <h3>Step 1: Clone the Repository</h3>
-            <pre>git clone https://github.com/Fosowl/agenticSeek.git
-cd agenticSeek
-mv .env.example .env</pre>
+            
+            <div class="cta-buttons">
+                <a href="https://github.com/Fosowl/agenticSeek/blob/main/README.md" class="btn" target="_blank">
+                    Get Started
+                </a>
+                <a href="#demo" class="btn btn-secondary">
+                    Watch Demo
+                </a>
+            </div>
+        </section>
 
-            <h3>Step 2: Create a Virtual Environment</h3>
-            <pre>python3 -m venv agentic_seek_env
-source agentic_seek_env/bin/activate
-# On Windows: agentic_seek_env\Scripts\activate</pre>
+        <section class="stats">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Local & Private</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">0</span>
+                    <span class="stat-label">Cloud Dependency</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Possibilities</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Your Assistant</span>
+                </div>
+            </div>
+        </section>
 
-            <h3>Step 3: Install Package</h3>
-            <p><strong>Automatic Installation:</strong></p>
-            <pre>./install.sh</pre>
-            <p><strong>Manual Installation:</strong></p>
-            <pre>pip3 install -r requirements.txt
-# Or
-python3 setup.py install</pre>
+        <section id="features" class="features">
+            <h2>Core Systems</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🔒</span>
+                    <h3>Fully Local & Private</h3>
+                    <p>Everything runs on your machine — no cloud, no data sharing. Your files, conversations, and searches stay completely private.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🌐</span>
+                    <h3>Autonomous Web Browsing</h3>
+                    <p>AgenticSeek can browse the internet independently — search, read, extract information, fill web forms — all hands-free.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">💻</span>
+                    <h3>Code Generation & Execution</h3>
+                    <p>Write, debug, and run programs in Python, C, Go, Java, and more — all without supervision or external dependencies.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🧠</span>
+                    <h3>Smart Agent Selection</h3>
+                    <p>Automatically determines the best AI agent for each task. Like having a team of specialized experts ready to help.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">📋</span>
+                    <h3>Complex Task Planning</h3>
+                    <p>From trip planning to complex projects — splits big tasks into manageable steps and executes them using multiple AI agents.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🎙️</span>
+                    <h3>Voice Interface</h3>
+                    <p>Clean, fast, futuristic voice and speech-to-text allowing you to interact naturally with your AI assistant.</p>
+                </div>
+            </div>
+        </section>
 
-            <h3>Run Locally on Your Machine</h3>
-            <p><em>We recommend using at least DeepSeek 14B; smaller models will struggle with tasks, especially web browsing.</em></p>
-            <p><strong>Step 1: Download Models</strong></p>
-            <p>Make sure you have <a href="https://ollama.com/">Ollama</a> installed.</p>
-            <pre>ollama pull deepseek-r1:14b</pre>
-            <p><strong>Step 2: Run the Assistant (Ollama)</strong></p>
-            <p>Start the Ollama server:</p>
-            <pre>ollama serve</pre>
-            <p>Update <code>config.ini</code>:</p>
-            <pre>[MAIN]
-is_local = True
-provider_name = ollama
-provider_model = deepseek-r1:14b
-provider_server_address = 127.0.0.1:11434</pre>
-            <p>Start services and run:</p>
-            <pre>sudo ./start_services.sh # On Windows: start ./start_services.cmd
-python3 cli.py</pre>
+        <section id="demo" style="padding: 5rem 2rem; text-align: center; max-width: 1200px; margin: 0 auto;">
+            <h2 style="font-size: 3rem; margin-bottom: 2rem; color: #fff;">See It In Action</h2>
+            <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; margin: 2rem 0; position: relative; overflow: hidden;">
+                <video controls style="width: 100%; max-width: 800px; border: 1px solid rgba(255,255,255,0.2); background: #000;">
+                    <source src="./ressources/demo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p style="color: #ccc; margin-top: 1rem; font-size: 0.9rem;">
+                    Watch AgenticSeek autonomously research project requirements, analyze candidate profiles, and provide intelligent matching recommendations.
+                </p>
+            </div>
+            <a href="https://github.com/Fosowl/agenticSeek#demo" class="btn" target="_blank">
+                View Full Demo
+            </a>
+        </section>
+    </main>
 
-            <h3>Run the LLM on Your Own Server</h3>
-            <p><strong>Step 1: Set Up the Server</strong></p>
-            <p>On your server, get the IP address:</p>
-            <pre>ip a | grep "inet " | grep -v 127.0.0.1 | awk '{print $2}' | cut -d/ -f1</pre>
-            <p>Clone the repository and enter the <code>server/</code> folder:</p>
-            <pre>git clone --depth 1 https://github.com/Fosowl/agenticSeek.git
-cd agenticSeek/server/</pre>
-            <p>Install server-specific requirements:</p>
-            <pre>pip3 install -r requirements.txt</pre>
-            <p>Run the server script:</p>
-            <pre>python3 app.py --provider ollama --port 3333</pre>
-            <p><strong>Step 2: Run on Your Computer</strong></p>
-            <p>Update <code>config.ini</code>:</p>
-            <pre>[MAIN]
-is_local = False
-provider_name = server
-provider_model = deepseek-r1:14b
-provider_server_address = x.x.x.x:3333</pre>
-            <p>Start services and run:</p>
-            <pre>sudo ./start_services.sh # On Windows: start ./start_services.cmd
-python3 cli.py</pre>
-
-            <h3>Run with an API</h3>
-            <p>Update <code>config.ini</code>:</p>
-            <pre>[MAIN]
-is_local = False
-provider_name = openai
-provider_model = gpt-4o
-provider_server_address = 127.0.0.1:5000</pre>
-            <p>Start services and run:</p>
-            <pre>sudo ./start_services.sh # On Windows: start ./start_services.cmd
-python3 cli.py</pre>
-        </div>
-
-        <div id="usage">
-            <h2>Usage</h2>
-            <p>Ensure services are running with <code>./start_services.sh</code> and start AgenticSeek with <code>python3 cli.py</code>:</p>
-            <pre>sudo ./start_services.sh
-python3 cli.py</pre>
-            <p>You will see a prompt <code>>>> </code> indicating AgenticSeek is ready for instructions. You can also enable speech-to-text by setting <code>listen = True</code> in <code>config.ini</code>.</p>
-            <p>To exit, say or type <code>goodbye</code>.</p>
-            <h3>Example Usage</h3>
-            <p><strong>Coding/Bash:</strong></p>
-            <ul>
-                <li>Make a snake game in Python</li>
-                <li>Show me how to multiply matrices in C</li>
-                <li>Make a blackjack game in Golang</li>
-            </ul>
-            <p><strong>Web Search:</strong></p>
-            <ul>
-                <li>Do a web search to find cool tech startups in Japan working on cutting-edge AI research</li>
-                <li>Can you find on the internet who created AgenticSeek?</li>
-                <li>Can you use a fuel calculator online to estimate the cost of a Nice - Milan trip?</li>
-            </ul>
-            <p><strong>File System:</strong></p>
-            <ul>
-                <li>Hey, can you find where contract.pdf is? I lost it</li>
-                <li>Show me how much space I have left on my disk</li>
-                <li>Can you follow the readme and install a project at /home/path/project?</li>
-            </ul>
-            <p><strong>Casual:</strong></p>
-            <ul>
-                <li>Tell me about Rennes, France</li>
-                <li>Should I pursue a PhD?</li>
-                <li>What's the best workout routine?</li>
-            </ul>
-            <p><em>Note: Be explicit in your queries (e.g., specify "do a web search" for web tasks) as the agent routing system is still in early development.</em></p>
-
-            <h3>Speech to Text</h3>
-            <p>Enable speech-to-text by setting <code>listen = True</code> in <code>config.ini</code>:</p>
-            <pre>listen = True</pre>
-            <p>Set the agent's name (e.g., <code>Friday</code>) for voice activation:</p>
-            <pre>agent_name = Friday</pre>
-            <p>Say the agent's name to wake it, speak  speak your query clearly, and end with a confirmation phrase like <code>do it</code>, <code>go ahead</code>, or <code>proceed</code>.</p>
-        </div>
-
-        <div id="contribute">
-            <h2>Contribute</h2>
-            <p>We’re looking for developers to improve AgenticSeek! Check out open issues or discussions on <a href="https://github.com/Fosowl/agenticSeek">GitHub</a>.</p>
-            <p><strong>License:</strong> GPL-3.0</p>
-            <p><strong>Maintainers:</strong> <a href="https://github.com/Fosowl">Fosowl</a>, <a href="https://github.com/steveh8758">steveh8758</a></p>
-            <a href="https://github.com/Fosowl/agenticSeek" class="button">Join Us</a>
-        </div>
-
-        <div id="known-issues">
-            <h2>Known Issues</h2>
-            <h3>Chromedriver Issues</h3>
-            <p><strong>Error:</strong> <code>session not created: This version of ChromeDriver only supports Chrome version 113</code></p>
-            <p>This occurs due to a mismatch between your browser and ChromeDriver version. Download the latest ChromeDriver from:</p>
-            <ul>
-                <li><a href="https://developer.chrome.com/docs/chromedriver/downloads">ChromeDriver Downloads</a> (for Chrome versions < 115)</li>
-                <li><a href="https://googlechromelabs.github.io/chrome-for-testing/">Chrome for Testing</a> (for Chrome versions ≥ 115)</li>
-            </ul>
-        </div>
-    </div>
     <footer>
-        <p>© 2025 AgenticSeek | Built by <a href="https://github.com/Fosowl">Fosowl</a> & <a href="https://github.com/steveh8758">steveh8758</a></p>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/Fosowl/agenticSeek" target="_blank">GitHub</a>
+                <a href="https://discord.gg/8hGDaME3TC" target="_blank">Discord</a>
+                <a href="https://x.com/Martin993886460" target="_blank">Twitter</a>
+                <a href="https://github.com/Fosowl/agenticSeek/blob/main/README.md" target="_blank">Documentation</a>
+            </div>
+            <p class="copyright">
+                © 2025 AgenticSeek - Open Source AI Assistant
+            </p>
+        </div>
     </footer>
+
+    <script>
+        const typingText = document.querySelector('.typing-text');
+        const phrases = [
+            '100% Private AI Assistant',
+            'Local Manus Alternative',
+            'Voice-Enabled Agent',
+            'Autonomous Web Browser',
+            'Code Generation System'
+        ];
+        let currentPhrase = 0;
+        let currentChar = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const current = phrases[currentPhrase];
+            
+            if (isDeleting) {
+                typingText.textContent = current.substring(0, currentChar - 1);
+                currentChar--;
+            } else {
+                typingText.textContent = current.substring(0, currentChar + 1);
+                currentChar++;
+            }
+
+            if (!isDeleting && currentChar === current.length) {
+                setTimeout(() => isDeleting = true, 2000);
+            } else if (isDeleting && currentChar === 0) {
+                isDeleting = false;
+                currentPhrase = (currentPhrase + 1) % phrases.length;
+            }
+
+            const speed = isDeleting ? 50 : 100;
+            setTimeout(typeEffect, speed);
+        }
+
+        typeEffect();
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${rate}px)`;
+            }
+        });
+    </script>
 </body>
 </html>
