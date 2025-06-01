@@ -3,149 +3,629 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Martin Legrand - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Martin Legrand</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: #f5f2e8;
+            color: #1a1a1a;
+            overflow-x: hidden;
+            /* cursor: none; */ /* Removed custom cursor */
+            font-weight: 300;
+            letter-spacing: 0.3px;
+            line-height: 1.6;
+        }
+        
+        /* Removed .cursor styles */
+        
+        .glitch {
+            position: relative;
+            color: #1a1a1a;
+            font-size: inherit;
+            font-weight: inherit;
+            line-height: inherit;
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+        
+        .glitch::before {
+            animation: glitch-1 4s infinite;
+            color: #666;
+            z-index: -1;
+        }
+        
+        .glitch::after {
+            animation: glitch-2 4s infinite;
+            color: #999;
+            z-index: -2;
+        }
+        
+        @keyframes glitch-1 {
+            0%, 94%, 100% {
+                transform: translate(0);
+                opacity: 0;
+            }
+            95%, 97% {
+                transform: translate(-0.5px, 0.5px);
+                opacity: 0.6;
+            }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 92%, 100% {
+                transform: translate(0);
+                opacity: 0;
+            }
+            93%, 95% {
+                transform: translate(0.5px, -0.5px);
+                opacity: 0.4;
+            }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .header {
+            margin-bottom: 4rem;
+            padding: 2rem 0;
+            position: relative;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #1a1a1a;
+            opacity: 0.1;
+        }
+        
+        .name {
+            font-size: 3.2rem;
+            font-weight: 200;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            color: #000;
+            position: relative;
+        }
+        
+        .tagline {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            line-height: 1.8;
+            max-width: 700px;
+            color: #333;
+            font-weight: 300;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in-out forwards;
+        }
+        
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.4s; }
+        .section:nth-child(4) { animation-delay: 0.6s; }
+        .section:nth-child(5) { animation-delay: 0.8s; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #000;
+            position: relative;
+            font-weight: 400;
+            text-transform: lowercase;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 1px;
+            background: #1a1a1a;
+            opacity: 0.3;
+        }
+        
+        .project {
+            margin-bottom: 2.5rem;
+            padding: 2rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.02);
+            transition: width 0.5s ease;
+        }
+        
+        .project-title {
+            font-size: 1.1rem;
+            color: #000;
+            margin-bottom: 0.8rem;
+            text-decoration: none;
+            font-weight: 400;
+            display: block;
+            transition: all 0.2s ease;
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .star-count {
+            pointer-events: none;
+            user-select: none;
+        }
+        
+        .project-title:hover {
+            color: #333;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+        }
+        
+        .project-description {
+            font-size: 0.85rem;
+            line-height: 1.7;
+            opacity: 0.8;
+            color: #444;
+            font-weight: 300;
+        }
+        
+        .experience {
+            margin-bottom: 2.5rem;
+            padding-left: 2rem;
+            border-left: 2px solid rgba(0, 0, 0, 0.05);
+            transition: border-color 0.3s ease;
+            position: relative;
+        }
+        
+        .experience::before {
+            content: '';
+            position: absolute;
+            left: -3px;
+            top: 0;
+            width: 4px;
+            height: 4px;
+            background: #1a1a1a;
+            opacity: 0.3;
+        }
+        
+        .experience:hover {
+            border-left-color: rgba(0, 0, 0, 0.15);
+        }
+        
+        .job-title {
+            font-size: 1rem;
+            color: #000;
+            margin-bottom: 0.4rem;
+            font-weight: 400;
+        }
+        
+        .company {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 0.4rem;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+        
+        .period {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            margin-bottom: 1rem;
+            color: #555;
+            font-weight: 300;
+        }
+        
+        .job-description {
+            font-size: 0.85rem;
+            line-height: 1.7;
+            opacity: 0.8;
+            color: #444;
+            font-weight: 300;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tech-category {
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+        
+        .tech-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.02);
+            transition: width 0.4s ease;
+        }
+        
+        .tech-category:hover::before {
+            width: 100%;
+        }
+        
+        .tech-category:hover {
+            border-color: rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.4);
+        }
+        
+        .tech-category h4 {
+            color: #000;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+        
+        .tech-list {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            line-height: 1.7;
+            color: #444;
+            font-weight: 300;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .contact-item {
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+        
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: rgba(0, 0, 0, 0.02);
+            transition: height 0.4s ease;
+        }
+        
+        .contact-item:hover::before {
+            height: 100%;
+        }
+        
+        .contact-item:hover {
+            border-color: rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.4);
+        }
+        
+        .contact-item a {
+            color: #000;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 300;
+            transition: all 0.2s ease;
+        }
+        
+        .contact-item a:hover {
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+        }
+        
+        .contact-item span {
+            color: #333;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+        
+        .static-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.003;
+            z-index: -1;
+            background-image: 
+                radial-gradient(circle at 25% 25%, #000 0.5px, transparent 0.5px),
+                radial-gradient(circle at 75% 75%, #000 0.3px, transparent 0.3px);
+            background-size: 120px 120px, 200px 200px;
+            animation: staticMove 6s infinite linear;
+        }
+        
+        @keyframes staticMove {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(1px, -1px); }
+            50% { transform: translate(-1px, 1px); }
+            75% { transform: translate(1px, 1px); }
+            100% { transform: translate(-1px, -1px); }
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 0.8rem;
+            opacity: 0.6;
+            color: #555;
+            font-weight: 300;
+        }
+        
+        /* Screen flicker effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                transparent 0%,
+                rgba(0, 0, 0, 0.005) 50%,
+                transparent 100%
+            );
+            background-size: 100% 2px;
+            z-index: -1;
+            pointer-events: none;
+            animation: scanlines 0.05s linear infinite;
+        }
+        
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(2px); }
+        }
+        
+        /* Subtle screen distortion */
+        .distortion {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10000;
+            background: transparent;
+            opacity: 0;
+            transition: opacity 0.1s ease;
+        }
+        
+        .distortion.active {
+            opacity: 1;
+            background: 
+                linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.01) 50%, transparent 100%),
+                linear-gradient(0deg, transparent 0%, rgba(0,0,0,0.005) 50%, transparent 100%);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+            
+            .name {
+                font-size: 2.5rem;
+            }
+            
+            .tech-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project,
+            .experience {
+                padding-left: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="terminal">
-        <div class="terminal-header">
-            <span class="button close"></span>
-            <span class="button minimize"></span>
-            <span class="button maximize"></span>
-            <span class="title">Martin Legrand - Portfolio</span>
-        </div>
-        <div class="terminal-body">
-            <header>
-                <h1>Martin Legrand</h1>
-                <p>Machine Learning Engineer specializing in Audio Recognition / ASR and Natural Language Processing (NLP/LLMs)</p>
-            </header>
-            <main>
-                <section>
-                    <h2>$ education</h2>
-                    <br>
-                    <h3>Epitech (2019 - 2024)</h3>
-                    <p>Master of Computer Science</p>
-                    <ul>
-                        <li>Learning computer science from the fundamentals (C, C++), Python, Web & Mobile frameworks.</li>
-                        <li>Project-based methodology, often carried out in groups.</li>
-                        <li>Specialization in AI in the 4th and 5th years.</li>
-                    </ul>
-                    <br>
-                    <h3>造甲大學 Feng Chia University (2022 - 2023)</h3>
-                    <p>Study year in Taiwan.</p>
-                    <ul>
-                        <li>Courses in Computer Vision, Optimization, Optimal Control, NLP Algorithms, and AI for E-commerce.</li>
-                        <li>Familiarity with key AI players, such as TSMC, a leader in GPU chip manufacturing.</li>
-                        <li>Knowledge of the Asian market.</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>$ projects</h2>
-                    <ul>
-                        <li>
-                            <a href="agenticSeek.html" target="_blank" rel="noopener noreferrer">Jarvis like AI assistant</a>: 
-                            This project aim to create an AI assistant that can perform a wide range of tasks. Using swarm of deepseek agents.
-                            It can browse the web, conqueer and divide tasks and execute code in many languages and use Bash to control the user system.
-                            With its interpreter it detects and fixes errors autonomously. A built-in routing system selects the best agent for each task, optimizing performance.
-                            Fast text-to-speech and speech-to-text ensures seamless interaction, while memory compression efficiently manages long sessions.
-                        </li>
-                        <br>
-                        <li>
-                            <a href="https://github.com/Fosowl/MonocularSLAM" target="_blank" rel="noopener noreferrer">MonocularSLAM</a>: 
-                            Implementation of Simultaneous Localization and Mapping (SLAM) algorithms using OpenCV. 
-                            This project focused on enabling a single camera (monocular vision) to map an environment while tracking its own position. 
-                            Utilized Python and OpenCV to process video frames, extract features, and reconstruct 3D scenes in real-time, 
-                            showcasing applications in robotics and augmented reality.
-                        </li>
-                        <br>
-                        <li>
-                            <a href="https://github.com/Fosowl/SoundGAN" target="_blank" rel="noopener noreferrer">SoundGAN</a>: 
-                            Developed a Generative Adversarial Network (GAN) for synthetic sound generation in PyTorch.
-                            The project explored the use of deep learning to create audio samples, such as environmental sounds or musical tones, 
-                            by training a generator and discriminator on audio datasets. It come with a full pipeline for sound acquisition and processing.
-                        </li>
-                        <br>
-                        <li>
-                            <a href="https://github.com/Fosowl/ReinforcementLearningGym" target="_blank" rel="noopener noreferrer">ReinforcementLearningGym</a>: 
-                            Designed a suite of reinforcement learning (RL) experiments to navigate OpenAI Gym environments. 
-                            Solved classic RL problems like cart-pole balancing, moon lander and walker with Q-learning and deep Q-networks (DQN). 
-                        </li>
-                        <br>
-                        <li>
-                            <a href="https://github.com/Fosowl/WoodetectChatbot" target="_blank" rel="noopener noreferrer">WoodetectChatbot</a>: 
-                            Built a conversational chatbot as part of the Woodetect project website, finetuned for our specific needs. 
-                        </li>
-                    </ul>
-                    <h2>$ publication</h2>
-                    <br>
-                    <li>
-                        <a href="https://medium.com/@mlg.fcu" target="_blank" rel="noopener noreferrer">Medium articles</a>: 
-                        Authoring of technical write-ups documenting my AI projects and insights. 
-                        Covered topics such as NLP algorithms, audio processing with CNNs, and optimization techniques learned during my studies in Taiwan. 
-                    </li>
-                    <ul>
-                    </ul>
-                </section>
-                <section>
-                    <h2>$ experience</h2>
-                    <br>
-                    <h3>AI Research Engineer - Alten (03/2024 - 08/2024)</h3>
-                    <p>Rennes, France</p>
-                    <ul>
-                        <li>Research project on a solution leveraging LLMs for voice command of autonomous agents in multi-agent systems.</li>
-                        <li>Contribution to a research topic aimed at improving the performance of small-scale LLMs (1B to 7B) in slot filling. Achieved a 15-20% performance improvement on a voice instruction dataset.</li>
-                        <li>Conducted experiments and authored an internal research document.</li>
-                    </ul>
-                    <br>
-                    <h3>Machine Learning Engineer - Woodetect (01/2022 - 01/2024)</h3>
-                    <p>France/Taiwan (remote)</p>
-                    <ul>
-                        <li>AI & Machine Learning developer for the Woodetect study project as part of the Epitech Innovative Project.</li>
-                        <li>Developed a sound analysis system using Convolutional Neural Networks (CNN) with PyTorch.</li>
-                        <li>Built a pipeline for sound acquisition and processing.</li>
-                        <li>Worked in a team of 9 members across different time zones.</li>
-                        <li>Developed a chatbot using Llama 2.</li>
-                    </ul>
-                    <br>
-                    <h3>Flutter Developer - Grsentiers (03/2022 - 08/2022)</h3>
-                    <p>Bruxelles, Belgium</p>
-                    <ul>
-                        <li>Developer at Grsentiers, designing a mobile application in Flutter.</li>
-                    </ul>
-                    <br>
-                    <h3>DevOps Engineer - CNRS (10/2021 - 02/2022)</h3>
-                    <p>Toulouse, France</p>
-                    <ul>
-                        <li>Developer at the Laero laboratory of CNRS, setting up a Yocto DevOps compilation pipeline for an airborne pollution measurement project (IAGOS project).</li>
-                        <li>Automated the compilation of the operating system and embedded software through a CI/CD pipeline with Gitlab.</li>
-                        <li>Created a custom Yocto distribution tailored to the requirements of embedded hardware.</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>$ tech_stack</h2>
-                    <br>
-                    <ul>
-                        <li>Language: Python, C/C++, Golang, C#, R, CUDA</li>
-                        <li>Framework ML: Pytorch, Tensorflow, Transformers, Keras, Numpy, Hugging-Face</li>
-                        <li>Devops: Gitlab, Github, Docker, MLflow, AWS</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>$ contact</h2>
-                    <br>
-                    <p>Open to contract. Feel free to contact me for any inquiries.</p>
-                    <br>
-                    <p>Email: <a href="mailto:martin.legrand@epitech.eu">martin.legrand@epitech.eu</a></p>
-                    <p>Telegram: +33 06 03 98 60 75</p>
-                    <p>GitHub: <a href="https://github.com/Fosowl" target="_blank" rel="noopener noreferrer">https://github.com/Fosowl</a></p>
-                    <p>Location: Toulouse, France</p>
-                    <p>Languages: English, French, Chinese</p>
-                </section>
-            </main>
-            <footer>
-                <p>martin_legrand@portfolio:~$ exit</p>
-            </footer>
-        </div>
+    <!-- Removed <div class="cursor"></div> -->
+    <div class="static-overlay"></div>
+    <div class="distortion"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="name glitch" data-text="martin.legrand">martin.legrand</h1>
+            <p class="tagline">machine learning engineer // audio recognition // nlp // llms<br>
+            coding future divinity</p>
+        </header>
+        
+        <section class="section">
+            <h2 class="section-title">core.distortion</h2>
+            
+            <div class="project">
+                <div class="project-header">
+                    <a href="agenticSeek.html" class="project-title">agentic.seek</a>
+                </div>
+                <p class="project-description">
+                    manus ai alternative // fully local // autonomous task execution // web browsing // code interpretation // voice interaction
+                <p>
+                    15k stars
+                </p>
+            </div>
+            
+            <div class="project">
+                <a href="https://github.com/Fosowl/MonocularSLAM" class="project-title">monocular.slam</a>
+                <p class="project-description">
+                    simultaneous localization and mapping // single camera 3d reconstruction // opencv
+                </p>
+            </div>
+            
+            <div class="project">
+                <a href="https://github.com/Fosowl/SoundGAN" class="project-title">sound.gan</a>
+                <p class="project-description">
+                    generative adversarial network for synthetic audio // pytorch implementation
+                </p>
+            </div>
+            
+            <div class="project">
+                <a href="https://github.com/Fosowl/ReinforcementLearningGym" class="project-title">rl.experiments</a>
+                <p class="project-description">
+                    reinforcement learning // openai gym environments // cart-pole // lunar lander // walker solutions
+                </p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">core.society</h2>
+
+            <div class="experience">
+                <h3 class="job-title">ai agents engineer</h3>
+                <p class="company">cnrs</p>
+                <p class="period">present day // nice, france</p>
+                <p class="job-description">
+                    unknown // classified
+                </p>
+            </div>
+            
+            <div class="experience">
+                <h3 class="job-title">ai research engineer</h3>
+                <p class="company">alten</p>
+                <p class="period">03/2024 - 08/2024 // rennes, france</p>
+                <p class="job-description">
+                    llm voice command systems for autonomous agents // slot filling optimization achieving 15-20% performance improvement on 1b-7b parameter models // multi-agent systems research
+                </p>
+            </div>
+            
+            <div class="experience">
+                <h3 class="job-title">machine learning engineer</h3>
+                <p class="company">woodetect</p>
+                <p class="period">01/2022 - 01/2024 // remote france/taiwan</p>
+                <p class="job-description">
+                    cnn-based sound analysis systems // pytorch pipeline development // cross-timezone collaboration with 9-member team // llama2 chatbot
+                </p>
+            </div>
+            
+            <div class="experience">
+                <h3 class="job-title">devops engineer</h3>
+                <p class="company">cnrs laero laboratory</p>
+                <p class="period">10/2021 - 02/2022 // toulouse, france</p>
+                <p class="job-description">
+                    yocto devops pipeline for airborne pollution measurement // automated os compilation // custom embedded distributions // gitlab ci/cd implementation
+                </p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">core.infornography</h2>
+            
+            <div class="tech-grid">
+                <div class="tech-category">
+                    <h4>core languages</h4>
+                    <p class="tech-list">python // c/c++ // golang // c# // r // cuda</p>
+                </div>
+                
+                <div class="tech-category">
+                    <h4>ml frameworks</h4>
+                    <p class="tech-list">pytorch // tensorflow // transformers // keras // numpy // hugging-face</p>
+                </div>
+                
+                <div class="tech-category">
+                    <h4>infrastructure</h4>
+                    <p class="tech-list">gitlab // github // docker // mlflow // aws</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">core.landscape</h2>
+            
+            <div class="experience">
+                <h3 class="job-title">master of computer science</h3>
+                <p class="company">epitech</p>
+                <p class="period">2019 - 2024</p>
+                <p class="job-description">
+                    fundamentals to advanced ai specialization // project-based methodology // ai focus in years 4-5
+                </p>
+            </div>
+            
+            <div class="experience">
+                <h3 class="job-title">international study program</h3>
+                <p class="company">feng chia university // taiwan</p>
+                <p class="period">2022 - 2023</p>
+                <p class="job-description">
+                    computer vision // optimization theory // optimal control // nlp algorithms // asian market
+                </p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">core.ego</h2>
+            
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <a href="mailto:martin.legrand@epitech.eu">martin.legrand@epitech.eu</a>
+                </div>
+                
+                <div class="contact-item">
+                    <a href="https://github.com/Fosowl">github.com/fosowl</a>
+                </div>
+                
+                <div class="contact-item">
+                    <span>location: nice, france</span>
+                </div>
+                
+                <div class="contact-item">
+                    <span>languages: english // french // chinese</span>
+                </div>
+            </div>
+        </section>
     </div>
+    
+    <footer class="footer">
+        <p>no matter where you go... everyone's connected...</p>
+    </footer>
 </body>
 </html>
