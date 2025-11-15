@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Lessons learned from building agents — Martin Legrand</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500&display=swap');
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'JetBrains Mono',monospace;background:#f5f2e8;color:#1a1a1a;padding:3rem 2rem}
+        .container{max-width:800px;margin:0 auto}
+        h1{font-size:1.6rem;margin-bottom:0.5rem}
+        .meta{opacity:0.7;font-size:0.9rem;margin-bottom:1rem}
+        p{line-height:1.6;margin-bottom:0.75rem;color:#333}
+        ol{margin-left:1rem;line-height:1.6}
+        li{margin-bottom:0.6rem}
+        a{color:#111}
+        .nav{margin-bottom:1rem}
+        .footer{margin-top:2.5rem;color:#555;opacity:0.8;font-size:0.85rem}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav"><a href="index.html">← back to blog</a></nav>
+
+        <article>
+            <h1>Lessons learned from building agents</h1>
+            <div class="meta">Nov 15, 2025 • Martin Legrand</div>
+
+            <p>These notes draw on work on <strong>AgenticSeek</strong> and my current role at CNRS. A practical priority: tackle time bottlenecks early. Waiting hours for an agent run to reach step 54 and crash wastes huge time — design to avoid failure, recover, and replay.</p>
+
+            <ol>
+                <li><strong>Implement a solid provider first.</strong> Add robust error handling, traceability and recovery. LLM providers fail for many reasons (quota, server, auth); make the provider resilient.</li>
+
+                <li><strong>Cache and mock everything.</strong> Don’t wait for long runs to debug: provide mock responses and a local cache so you can reproduce and skip expensive steps.</li>
+
+                <li><strong>Build for failure, not success.</strong> Complex systems will fail — assume it. Add monitoring, self-checks, watchdogs, and recovery flows (agent supervising agent).</li>
+
+                <li><strong>Don’t overhype public MCPs.</strong> Many multi-component platforms on GitHub are immature; often a small custom control loop tailored to your needs is faster to implement and more reliable.</li>
+
+                <li><strong>Minimize context.</strong> Use compression, split into multiple agents, and remove unnecessary tokens (e.g., verbose internal think traces). Bigger context often degrades practical performance.</li>
+
+                <li><strong>Keep the goal visible.</strong> Remind the agent of its objective or run a supervisor agent that can intervene when it drifts.</li>
+
+                <li><strong>Circuit breakers for recursion.</strong> Agents love subtle infinite loops — add hard limits and pattern detection (e.g., repeated reformulations of the same question) and break or escalate when detected.</li>
+
+                <li><strong>Minimize domain-specific tools.</strong> The more tools you expose, the more confused the agent about order and usage. Prefer fewer, more capable tools that return richer, well-structured results.</li>
+
+                <li><strong>Limit tool output and encourage step-by-step use.</strong> Tools should never return massive payloads (cap outputs, e.g., ≤ 8k tokens) and should be designed to nudge the model toward incremental, stepwise reasoning.</li>
+
+                <li><strong>Use the best model first, then scale down.</strong> Prototype with the strongest model to validate behavior, then test if cheaper/local models can reproduce it for cost-effective deployment and heavy testing.</li>
+
+                <li><strong>OpenAI models are crap for agents.</strong> From my personal experimence openAI models are terrible at following instructions properly. They often fail to respect a simple format and will often refuse leading to planner failure, tools use failure.... production failure. </li>
+
+                <li><strong>Use cheap/local models for heavy testing.</strong> Reduce cost by running bulk tests on local or low-cost models to iterate quickly before moving to higher-cost inference.
+                </li>
+
+                <li><strong>Keep a human in the loop.</strong> AGI is not here — humans should review high-impact decisions and intervene when agents show brittle or risky behavior.</li>
+
+                <li><strong>Provenance tracking.</strong> Record not just decisions but prompt versions, model used, temperature and other parameters so you can reproduce and audit agent behavior.</li>
+            </ol>
+
+            <p>Short, pragmatic guidance: protect your time first, then your system. Build tooling (mocks, caches, and recovery) up-front — it pays back many hours during development and debugging.</p>
+        </article>
+
+        <footer class="footer">martin.legrand • ml/ai engineer</footer>
+    </div>
+</body>
+</html>

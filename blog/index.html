@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog — Martin Legrand</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500&display=swap');
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'JetBrains Mono',monospace;background:#f5f2e8;color:#1a1a1a;padding:3rem 2rem}
+        .container{max-width:900px;margin:0 auto}
+        .name{font-size:2.4rem;margin-bottom:0.5rem}
+        .tagline{opacity:0.7;margin-bottom:1.5rem}
+        a{color:#111;text-decoration:none}
+        .nav{margin-bottom:1.5rem}
+        .nav a{margin-right:1rem;font-size:0.95rem;color:#111}
+        .posts{display:grid;gap:1rem}
+        .post{padding:1.25rem;border:1px solid rgba(0,0,0,0.05);background:rgba(255,255,255,0.9);border-radius:8px}
+        .post h3{margin-bottom:0.4rem;font-size:1.1rem}
+        .meta{font-size:0.85rem;opacity:0.7;margin-bottom:0.6rem}
+        .excerpt{color:#333;line-height:1.6}
+        .footer{margin-top:3rem;font-size:0.85rem;color:#555;opacity:0.8}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="name">martin.legrand</h1>
+            <p class="tagline">blog — essays, experiments & notes</p>
+        </header>
+
+        <nav class="nav" aria-label="local navigation">
+            <a href="../index.html">← home</a>
+            <a href="../research.html">research</a>
+        </nav>
+
+        <main>
+            <section class="posts">
+                <article class="post">
+                    <h3><a href="lessons-agents.html">Lessons learned from building agents</a></h3>
+                    <div class="meta">Nov 15, 2025 • short</div>
+                    <p class="excerpt">Practical tips from AgenticSeek and CNRS work: prioritize time bottlenecks, build robust providers, cache & mock everything, and design for failure. <a href="lessons-agents.html">Read more →</a></p>
+                </article>
+            </section>
+        </main>
+
+        <footer class="footer">martin.legrand • ml/ai engineer</footer>
+    </div>
+</body>
+</html>
