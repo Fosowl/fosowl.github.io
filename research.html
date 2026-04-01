@@ -12,13 +12,17 @@
         .container{max-width:900px;margin:0 auto}
         .name{font-size:2.4rem;margin-bottom:0.5rem}
         .tagline{opacity:0.7;margin-bottom:1.5rem}
+        .research-intro{font-size:0.95rem;opacity:0.75;margin-bottom:1.5rem}
     .placeholder{padding:2rem;border:1px solid rgba(0,0,0,0.05);background:rgba(255,255,255,0.6);border-radius:8px}
     .papers{display:grid;gap:1rem}
-    .paper{padding:1.25rem;border:1px solid rgba(0,0,0,0.05);background:rgba(255,255,255,0.95);border-radius:8px}
-    .paper h3{margin-bottom:0.4rem;font-size:1.05rem}
+    .paper{padding:1.25rem;border:1px solid rgba(0,0,0,0.05);background:rgba(255,255,255,0.95);border-radius:8px;transition:transform 0.15s ease,box-shadow 0.15s ease}
+    .paper:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+    .paper-link{display:block;text-decoration:none;color:inherit}
+    .paper h3{margin-bottom:0.4rem;font-size:1.05rem;color:#1a1a1a}
     .authors{font-size:0.9rem;opacity:0.8;margin-bottom:0.6rem}
-    .paper a{color:#0b4; text-decoration:underline}
+    .description{font-size:0.9rem;opacity:0.75;margin-bottom:0.6rem;line-height:1.5}
     .paper .source{font-size:0.9rem;opacity:0.7;margin-top:0.6rem}
+    .paper .source a{color:#0b4;text-decoration:underline}
         a{color:#111;text-decoration:none}
         .nav{margin-bottom:1.5rem}
         .nav a{margin-right:1rem;font-size:0.95rem;color:#111}
@@ -40,11 +44,23 @@
         <main>
             <section class="papers">
                 <h2>Research</h2>
+                <p class="research-intro">Here is where I share my research on multi-agent systems.</p>
 
                 <article class="paper">
-                    <h3>🧪 MetaboT 🍵: An LLM-based Multi-Agent Framework for Interactive Analysis of Mass Spectrometry Metabolomics Knowledge</h3>
-                    <div class="authors">Madina Bekbergenova, Lucas Pradi, Benjamin Navet, Emma Tysinger, Matthieu Feraud, Yousouf Taghzouti, Martin Legrand, Tao Jiang, Franck Michel, Yan Zhou Chen, Soha Hassoun, Olivier Kirchhoffer, Jean-Luc Wolfender, Florence Mehl, Marco Pagni, Wout Bittremieux, Fabien Gandon, Louis-Félix Nothias.</div>
-                    <div class="source">PREPRINT <a href="https://www.researchsquare.com/article/rs-6591884/v1" target="_blank" rel="noopener noreferrer">Research Square</a></div>
+                    <a href="https://arxiv.org/abs/2603.28986" target="_blank" rel="noopener noreferrer" class="paper-link">
+                        <h3>Mimosa Framework: Toward Evolving Multi-Agent Systems for Scientific Research</h3>
+                        <div class="authors">Martin Legrand, Tao Jiang, Matthieu Feraud, Benjamin Navet, Yousouf Taghzouti, Fabien Gandon, Elise Dumont, Louis-Félix Nothias</div>
+                        <p class="description">Current Autonomous Scientific Research (ASR) systems, despite leveraging large language models (LLMs) and agentic architectures, remain constrained by fixed workflows and toolsets that prevent adaptation to evolving tasks and environments. We introduce Mimosa, an evolving multi-agent framework that automatically synthesizes task-specific multi-agent workflows and iteratively refines them through experimental feedback. Mimosa leverages the Model Context Protocol (MCP) for dynamic tool discovery, generates workflow topologies via a meta-orchestrator, executes subtasks through code-generating agents that invoke available tools and scientific software libraries, and scores executions with an LLM-based judge whose feedback drives workflow refinement.</p>
+                        <div class="source">PREPRINT — Arxiv</div>
+                    </a>
+                </article>
+                <article class="paper">
+                    <a href="https://arxiv.org/abs/2510.01724" target="_blank" rel="noopener noreferrer" class="paper-link">
+                        <h3>MetaboT: An LLM-based Multi-Agent Framework for Interactive Analysis of Mass Spectrometry Metabolomics Knowledge</h3>
+                        <div class="authors">Madina Bekbergenova, Lucas Pradi, Benjamin Navet, Emma Tysinger, Matthieu Feraud, Yousouf Taghzouti, Martin Legrand, Tao Jiang, Franck Michel, Yan Zhou Chen, Soha Hassoun, Olivier Kirchhoffer, Jean-Luc Wolfender, Florence Mehl, Marco Pagni, Wout Bittremieux, Fabien Gandon, Louis-Félix Nothias</div>
+                        <p class="description">Mass spectrometry metabolomics generates vast amounts of data requiring advanced methods for interpretation. Knowledge graphs address these challenges by structuring mass spectrometry data, metabolite information, and their relationships into a connected network (Gaudry et al. 2024). However, effective use of a knowledge graph demands an in-depth understanding of its ontology and its query language syntax. To overcome this, we designed MetaboT, an AI system utilizing large language models (LLMs) to translate user questions into SPARQL semantic query language for operating on knowledge graphs (Steve Harris 2013). We demonstrate its effectiveness using the Experimental Natural Products Knowledge Graph (ENPKG), a large-scale public knowledge graph for plant natural products (Gaudry et al. 2024).</p>
+                        <div class="source">PREPRINT — Arxiv</div>
+                    </a>
                 </article>
 
             </section>
