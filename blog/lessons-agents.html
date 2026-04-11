@@ -1,69 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Lessons learned from building agents — Martin Legrand</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500&display=swap');
-        *{box-sizing:border-box;margin:0;padding:0}
-        body{font-family:'JetBrains Mono',monospace;background:#f5f2e8;color:#1a1a1a;padding:3rem 2rem}
-        .container{max-width:800px;margin:0 auto}
-        h1{font-size:1.6rem;margin-bottom:0.5rem}
-        .meta{opacity:0.7;font-size:0.9rem;margin-bottom:1rem}
-        p{line-height:1.6;margin-bottom:0.75rem;color:#333}
-        ol{margin-left:1rem;line-height:1.6}
-        li{margin-bottom:0.6rem}
-        a{color:#111}
-        .nav{margin-bottom:1rem}
-        .footer{margin-top:2.5rem;color:#555;opacity:0.8;font-size:0.85rem}
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Practical lessons from building production AI agent systems">
+    <meta name="author" content="Martin Legrand">
+    <title>Lessons Learned from Building Agents · Martin Legrand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
 </head>
-<body>
+<body class="scanlines">
+    <div class="grain-overlay"></div>
+    
     <div class="container">
-        <nav class="nav"><a href="index.html">← back to blog</a></nav>
+        <!-- Header -->
+        <header class="site-header">
+            <h1 class="site-title"><a href="../index.html" style="opacity: 1;">martin.legrand</a></h1>
+        </header>
 
+        <!-- Navigation -->
+        <nav class="site-nav" aria-label="Main navigation">
+            <a class="nav-link" href="index.html">← All Posts</a>
+            <a class="nav-link" href="../research.html">Research</a>
+            <a class="nav-link" href="https://github.com/Fosowl" target="_blank" rel="noopener">GitHub</a>
+        </nav>
+
+        <!-- Article -->
         <article>
-            <h1>Lessons learned from building agents</h1>
-            <div class="meta">Nov 15, 2025 • Martin Legrand</div>
+            <header class="article-header">
+                <h1 class="article-title">Lessons Learned from Building Agents</h1>
+                <p class="article-meta">November 15, 2025 · Martin Legrand</p>
+            </header>
 
-            <p>These notes draw on work on <strong>AgenticSeek</strong> and my current role at CNRS. A practical priority: tackle time bottlenecks early. Waiting hours for an agent run to reach step 54 and crash wastes huge time — design to avoid failure, recover, and replay.</p>
+            <div class="article-content">
+                <p style="font-size: 1.05rem; color: var(--text-primary); border-left: 2px solid var(--border); padding-left: var(--space-lg); margin-bottom: var(--space-2xl);">
+                    These insights draw from building <strong>AgenticSeek</strong> and my current work at CNRS. 
+                    A core principle: <em>protect your time first, then your system</em>. 
+                    Agent failures at step 54 after hours of execution are expensive—design for recovery from day one.
+                </p>
 
-            <ol>
-                <li><strong>Implement a solid provider first.</strong> Add robust error handling, traceability and recovery. LLM providers fail for many reasons (quota, server, auth); make the provider resilient.</li>
+                <ol>
+                    <li>
+                        <strong>Build a resilient provider layer first.</strong>
+                        LLM providers fail for myriad reasons: rate limits, server errors, authentication expiry, 
+                        transient network issues. Your provider must handle retries with exponential backoff, 
+                        graceful degradation between models, and comprehensive logging for traceability. 
+                        Without this foundation, debugging becomes nearly impossible.
+                    </li>
 
-                <li><strong>Cache and mock everything.</strong> Don’t wait for long runs to debug: provide mock responses and a local cache so you can reproduce and skip expensive steps.</li>
+                    <li>
+                        <strong>Cache and mock everything.</strong>
+                        Don't wait for long-running agent executions to test changes. Implement response caching 
+                        and mock interfaces so you can replay specific steps deterministically. This investment 
+                        pays for itself within days of active development.
+                    </li>
 
-                <li><strong>Build for failure, not success.</strong> Complex systems will fail — assume it. Add monitoring, self-checks, watchdogs, and recovery flows (agent supervising agent).</li>
+                    <li>
+                        <strong>Design for failure, not success.</strong>
+                        Complex agent systems <em>will</em> fail. Assume it. Add monitoring hooks, self-checks, 
+                        watchdog timers, and recovery flows. Consider agent-supervising-agent patterns where 
+                        one agent monitors another's progress and intervenes on stagnation.
+                    </li>
 
-                <li><strong>Don’t overhype public MCPs.</strong> Many multi-component platforms on GitHub are immature; often a small custom control loop tailored to your needs is faster to implement and more reliable.</li>
+                    <li>
+                        <strong>Evaluate MCP integrations carefully.</strong>
+                        Many Model Context Protocol implementations in open-source ecosystems are immature. 
+                        Often, a focused custom control loop tailored to your specific domain outperforms 
+                        generic integrations in both reliability and latency.
+                    </li>
 
-                <li><strong>Minimize context.</strong> Use compression, split into multiple agents, and remove unnecessary tokens (e.g., verbose internal think traces). Bigger context often degrades practical performance.</li>
+                    <li>
+                        <strong>Minimize context aggressively.</strong>
+                        Use compression techniques, split work across multiple specialized agents, and strip 
+                        unnecessary tokens (including verbose internal reasoning traces). Larger context windows 
+                        often degrade practical performance due to attention dilution.
+                    </li>
 
-                <li><strong>Keep the goal visible.</strong> Remind the agent of its objective or run a supervisor agent that can intervene when it drifts.</li>
+                    <li>
+                        <strong>Maintain goal visibility.</strong>
+                        Agents drift. Periodically remind the system of its objective, or implement a supervisor 
+                        agent that can detect deviation and issue corrective prompts. Explicit goal-state tracking 
+                        prevents many failure modes.
+                    </li>
 
-                <li><strong>Circuit breakers for recursion.</strong> Agents love subtle infinite loops — add hard limits and pattern detection (e.g., repeated reformulations of the same question) and break or escalate when detected.</li>
+                    <li>
+                        <strong>Implement circuit breakers for recursion.</strong>
+                        Agents are prone to subtle infinite loops—repeatedly reformulating the same question, 
+                        cycling between states, or expanding without convergence. Add hard iteration limits 
+                        and pattern detection (e.g., semantic similarity between consecutive outputs) with 
+                        automatic escalation.
+                    </li>
 
-                <li><strong>Minimize domain-specific tools.</strong> The more tools you expose, the more confused the agent about order and usage. Prefer fewer, more capable tools that return richer, well-structured results.</li>
+                    <li>
+                        <strong>Prefer fewer, richer tools.</strong>
+                        Each additional tool increases cognitive load and decision latency. Design tools that 
+                        return comprehensive, well-structured outputs rather than many single-purpose utilities. 
+                        Clear documentation in tool descriptions is essential.
+                    </li>
 
-                <li><strong>Limit tool output and encourage step-by-step use.</strong> Tools should never return massive payloads (cap outputs, e.g., ≤ 8k tokens) and should be designed to nudge the model toward incremental, stepwise reasoning.</li>
+                    <li>
+                        <strong>Cap tool outputs and encourage incremental use.</strong>
+                        Tools should never return unbounded payloads. Implement output limits (e.g., ≤8k tokens) 
+                        and design interfaces that encourage stepwise reasoning rather than monolithic operations.
+                    </li>
 
-                <li><strong>Use the best model first, then scale down.</strong> Prototype with the strongest model to validate behavior, then test if cheaper/local models can reproduce it for cost-effective deployment and heavy testing.</li>
+                    <li>
+                        <strong>Prototype with the best model, then optimize.</strong>
+                        Start with the strongest available model to validate behavior and establish a performance 
+                        baseline. Once stable, systematically test if smaller or local models can achieve 
+                        equivalent results for cost-effective deployment.
+                    </li>
 
-                <li><strong>OpenAI models are crap for agents.</strong> From my personal experimence openAI models are terrible at following instructions properly. They often fail to respect a simple format and will often refuse leading to planner failure, tools use failure.... production failure. </li>
+                    <li>
+                        <strong>Choose models for instruction adherence.</strong>
+                        Not all models handle structured outputs and tool use reliably. From extensive testing, 
+                        certain model families consistently struggle with format adherence, leading to planner 
+                        failures and production issues. Validate format compliance rigorously before deployment.
+                    </li>
 
-                <li><strong>Use cheap/local models for heavy testing.</strong> Reduce cost by running bulk tests on local or low-cost models to iterate quickly before moving to higher-cost inference.
-                </li>
+                    <li>
+                        <strong>Use local models for bulk testing.</strong>
+                        Reduce iteration costs by running comprehensive test suites on local or low-cost models. 
+                        Reserve expensive API calls for final validation and edge cases.
+                    </li>
 
-                <li><strong>Keep a human in the loop.</strong> AGI is not here — humans should review high-impact decisions and intervene when agents show brittle or risky behavior.</li>
+                    <li>
+                        <strong>Keep humans in the loop for high-stakes decisions.</strong>
+                        AGI is not here. Design review checkpoints where humans validate agent decisions with 
+                        significant consequences. Build clear escalation paths for uncertain scenarios.
+                    </li>
 
-                <li><strong>Provenance tracking.</strong> Record not just decisions but prompt versions, model used, temperature and other parameters so you can reproduce and audit agent behavior.</li>
-            </ol>
+                    <li>
+                        <strong>Implement comprehensive provenance tracking.</strong>
+                        Record not just decisions but the complete context: prompt versions, model identifiers, 
+                        temperature settings, tool versions, and timestamps. Reproducibility and auditability 
+                        are essential for scientific and production applications.
+                    </li>
+                </ol>
 
-            <p>Short, pragmatic guidance: protect your time first, then your system. Build tooling (mocks, caches, and recovery) up-front — it pays back many hours during development and debugging.</p>
+                <p style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 1px solid var(--border);">
+                    The recurring theme: <strong>invest in tooling upfront</strong>. Mocks, caches, recovery mechanisms, 
+                    and monitoring may seem like overhead early in a project, but they compound in value as complexity 
+                    grows. Agent systems are inherently difficult to debug—design for observability from the start.
+                </p>
+            </div>
         </article>
 
-        <footer class="footer">martin.legrand • ml/ai engineer</footer>
+        <!-- Footer -->
+        <footer class="site-footer">
+            <span class="footer-text">© 2025 Martin Legrand</span>
+            <div class="footer-links">
+                <a href="../index.html">Portfolio</a>
+                <a href="../research.html">Research</a>
+                <a href="index.html">All Posts</a>
+            </div>
+        </footer>
     </div>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <script>
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
