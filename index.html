@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Martin Legrand - ML/AI Engineer specializing in agentic AI and local LLMs">
     <meta name="author" content="Martin Legrand">
+    <meta property="og:title" content="Martin Legrand · ML/AI Engineer">
+    <meta property="og:description" content="ML/AI Engineer specializing in agentic AI and local LLMs. Creator of AgenticSeek.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fosowl.github.io/">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ea">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#191713">
     <title>Martin Legrand · ML/AI Engineer</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23b5442d'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='30' fill='%23f6f3ea' text-anchor='middle'%3Eml%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -13,18 +21,31 @@
 </head>
 <body class="scanlines">
     <div class="grain-overlay"></div>
-    
+
     <div class="container">
         <!-- Header -->
         <header class="site-header">
-            <h1 class="site-title glitch" data-text="martin.legrand">martin.legrand</h1>
+            <h1 class="site-title glitch" data-text="martin.legrand">martin<span class="title-dot">.</span>legrand</h1>
             <p class="site-subtitle">ML/AI Engineer · Agentic AI & Local LLMs<br>Building intelligent systems that run anywhere</p>
+            <p class="header-meta">
+                Antibes, France
+                <span class="header-meta-sep">·</span>
+                <a href="https://github.com/Fosowl" target="_blank" rel="noopener">GitHub</a>
+                <span class="header-meta-sep">·</span>
+                <a href="mailto:martin.legrand@epitech.eu">Email</a>
+            </p>
         </header>
 
         <!-- Navigation -->
         <nav class="nav-banner" aria-label="Main navigation">
-            <a class="nav-btn" href="research.html">Research</a>
-            <a class="nav-btn" href="blog/index.html">Writing</a>
+            <a class="nav-btn" href="research.html">
+                <span class="nav-btn-title">Research</span>
+                <span class="nav-btn-desc">Publications & current focus</span>
+            </a>
+            <a class="nav-btn" href="blog/index.html">
+                <span class="nav-btn-title">Writing</span>
+                <span class="nav-btn-desc">Essays & engineering notes</span>
+            </a>
         </nav>
 
         <!-- Projects Section -->
@@ -40,8 +61,8 @@
                 </a>
                 <p class="card-meta">23k+ stars · Python · LLM Agents</p>
                 <p class="card-description">
-                    A fully local alternative to Manus AI. Autonomous agentic system capable of 
-                    complex task execution without cloud dependencies. Designed for privacy-conscious 
+                    A fully local alternative to Manus AI. Autonomous agentic system capable of
+                    complex task execution without cloud dependencies. Designed for privacy-conscious
                     users and organizations requiring on-premise AI solutions.
                 </p>
             </div>
@@ -52,10 +73,9 @@
                 </a>
                 <p class="card-meta">C++ · OpenCV · Computer Vision</p>
                 <p class="card-description">
-                    Real-time simultaneous localization and mapping using a single camera. 
-                    3D reconstruction pipeline with feature detection, pose estimation, and 
-                    sparse point cloud generation for applications
-                    such as robotics.
+                    Real-time simultaneous localization and mapping using a single camera.
+                    3D reconstruction pipeline with feature detection, pose estimation, and
+                    sparse point cloud generation for applications such as robotics.
                 </p>
             </div>
 
@@ -90,12 +110,12 @@
             <div class="timeline-item">
                 <h3 class="timeline-title">AI Research Engineer</h3>
                 <p class="timeline-org">CNRS — National Center for Scientific Research</p>
-                <p class="timeline-period">2024 – Present ·
-                Sophia-Antipolis, France</p>
+                <p class="timeline-period">2024 – Present · Sophia-Antipolis, France</p>
                 <p class="timeline-desc">
-                    Developing multi-agent AI systems for scientific
-                    research. Leading the Mimosa-AI AI-scientist
-                    framework project. <a href="https://arxiv.org/abs/2603.28986">Preprint</a> <a href="https://github.com/HolobiomicsLab/Mimosa-AI">Github</a>
+                    Developing multi-agent AI systems for scientific research.
+                    Leading Mimosa, an evolving AI-scientist framework project.
+                    <a href="https://arxiv.org/abs/2603.28986" target="_blank" rel="noopener">Preprint</a> ·
+                    <a href="https://github.com/HolobiomicsLab/Mimosa-AI" target="_blank" rel="noopener">GitHub</a>
                 </p>
             </div>
 
@@ -104,12 +124,10 @@
                 <p class="timeline-org">Alten</p>
                 <p class="timeline-period">Mar 2024 – Aug 2024 · Rennes, France</p>
                 <p class="timeline-desc">
-                    Worked on a LLM-powered voice command system for
-                    control of autonomous agents such as drone or
-                    robotic arm using small language model.
-                    Achieved 15–20% performance improvement on 1B–7B
-                    parameter models using fusion strategies for
-                    slot-filling.
+                    Worked on an LLM-powered voice command system for controlling autonomous
+                    agents such as drones and robotic arms using small language models.
+                    Achieved 15–20% performance improvement on 1B–7B parameter models
+                    using fusion strategies for slot-filling.
                 </p>
             </div>
 
@@ -118,12 +136,9 @@
                 <p class="timeline-org">Woodetect</p>
                 <p class="timeline-period">Jan 2022 – Jan 2024 · Remote (France/Taiwan)</p>
                 <p class="timeline-desc">
-                    Student project in a group over 2 years.
-                    Worked on a CNN-based audio recognition systems for
-                    monitoring deforestation activities. 
-                    End-to-end pipeline development with PyTorch,
-                    from scraping data to building custom models in
-                    pytorch.
+                    Two-year student group project building CNN-based audio recognition
+                    systems to monitor deforestation activity. End-to-end pipeline
+                    development with PyTorch, from data scraping to custom model design.
                 </p>
             </div>
 
@@ -132,7 +147,9 @@
                 <p class="timeline-org">CNRS LAERO Laboratory</p>
                 <p class="timeline-period">Oct 2021 – Feb 2022 · Toulouse, France</p>
                 <p class="timeline-desc">
-                    Worked on a airborne pollution measurement project. Automated OS compilation pipelines and built custom embedded Linux distributionsfor scientific instrumentation in atmospheric research.
+                    Worked on an airborne pollution measurement project. Automated OS compilation
+                    pipelines and built custom embedded Linux distributions for scientific
+                    instrumentation in atmospheric research.
                 </p>
             </div>
         </section>
@@ -144,26 +161,18 @@
                 <span class="section-subtitle">Technical expertise</span>
             </div>
 
-            <div class="grid-3">
-                <div class="card" style="margin-bottom: 0;">
-                    <h4 style="font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: var(--space-sm);">Languages</h4>
-                    <p class="card-description">
-                        Python · C/C++ · Go · C# · R · CUDA · JavaScript
-                    </p>
+            <div class="skills-list">
+                <div class="skills-row">
+                    <span class="skills-label">Languages</span>
+                    <span class="skills-items">Python · C/C++ · Go · C# · R · CUDA · JavaScript</span>
                 </div>
-
-                <div class="card" style="margin-bottom: 0;">
-                    <h4 style="font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: var(--space-sm);">ML & AI</h4>
-                    <p class="card-description">
-                        PyTorch · TensorFlow · Transformers · Keras · NumPy · Hugging Face · Agentic AI
-                    </p>
+                <div class="skills-row">
+                    <span class="skills-label">ML & AI</span>
+                    <span class="skills-items">PyTorch · TensorFlow · Transformers · Keras · NumPy · Hugging Face · Agentic AI</span>
                 </div>
-
-                <div class="card" style="margin-bottom: 0;">
-                    <h4 style="font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: var(--space-sm);">Infrastructure</h4>
-                    <p class="card-description">
-                        Docker · AWS · GitHub Actions · MLflow · Linux · Embedded Systems
-                    </p>
+                <div class="skills-row">
+                    <span class="skills-label">Infrastructure</span>
+                    <span class="skills-items">Docker · AWS · GitHub Actions · MLflow · Linux · Embedded Systems</span>
                 </div>
             </div>
         </section>
@@ -180,9 +189,9 @@
                 <p class="timeline-org">EPITECH · European Institute of Technology</p>
                 <p class="timeline-period">2019 – 2024</p>
                 <p class="timeline-desc">
-                    Five-year program with AI specialization. Project-based methodology 
-                    covering CS fundamentals, machine learning, full
-                    stack development and cybersecurity.
+                    Five-year program with AI specialization. Project-based methodology
+                    covering CS fundamentals, machine learning, full-stack development
+                    and cybersecurity.
                 </p>
             </div>
 
@@ -191,8 +200,8 @@
                 <p class="timeline-org">Feng Chia University · Taiwan</p>
                 <p class="timeline-period">2022 – 2023</p>
                 <p class="timeline-desc">
-                    Focus on computer vision, optimization theory, and optimal control. 
-                    Research in NLP algorithms with exposure to Asian technology markets 
+                    Focus on computer vision, optimization theory, and optimal control.
+                    Research in NLP algorithms with exposure to Asian technology markets
                     and cross-cultural collaboration.
                 </p>
             </div>
@@ -205,17 +214,13 @@
                 <span class="section-subtitle">Get in touch</span>
             </div>
 
-            <div class="grid-2">
-                <div class="card" style="text-align: center; margin-bottom: 0;">
-                    <a href="mailto:martin.legrand@epitech.eu" style="font-size: 0.95rem;">martin.legrand@epitech.eu</a>
-                </div>
-                <div class="card" style="text-align: center; margin-bottom: 0;">
-                    <a href="https://github.com/Fosowl" target="_blank" rel="noopener" style="font-size: 0.95rem;">github.com/fosowl</a>
-                </div>
+            <div class="contact-links">
+                <a class="contact-link" href="mailto:martin.legrand@epitech.eu">martin.legrand@epitech.eu</a>
+                <a class="contact-link" href="https://github.com/Fosowl" target="_blank" rel="noopener">github.com/fosowl</a>
             </div>
-            
-            <p style="text-align: center; margin-top: var(--space-lg); font-size: 0.85rem; color: var(--text-muted);">
-                Based in Antibes, France · Speak in English, French, and Chinese
+
+            <p class="contact-note">
+                Based in Antibes, France · English · French · Chinese
             </p>
         </section>
 
@@ -236,7 +241,7 @@
     <script>
         // Back to top button visibility
         const backToTop = document.getElementById('backToTop');
-        
+
         window.addEventListener('scroll', () => {
             if (window.scrollY > 500) {
                 backToTop.classList.add('visible');
@@ -244,7 +249,7 @@
                 backToTop.classList.remove('visible');
             }
         });
-        
+
         backToTop.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });

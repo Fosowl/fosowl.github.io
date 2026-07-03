@@ -5,7 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Martin Legrand - Research publications on multi-agent AI systems">
     <meta name="author" content="Martin Legrand">
+    <meta property="og:title" content="Research · Martin Legrand">
+    <meta property="og:description" content="Research on evolving multi-agent systems for autonomous scientific discovery.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fosowl.github.io/research.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f3ea">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#191713">
     <title>Research · Martin Legrand</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23b5442d'/%3E%3Ctext x='32' y='43' font-family='monospace' font-size='30' fill='%23f6f3ea' text-anchor='middle'%3Eml%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -13,11 +21,11 @@
 </head>
 <body class="scanlines">
     <div class="grain-overlay"></div>
-    
+
     <div class="container">
         <!-- Header -->
         <header class="site-header">
-            <h1 class="site-title"><a href="index.html" style="opacity: 1;">martin.legrand</a></h1>
+            <h1 class="site-title"><a href="index.html">martin<span class="title-dot">.</span>legrand</a></h1>
             <p class="site-subtitle">Research · Multi-Agent Systems · AI for Science</p>
         </header>
 
@@ -28,10 +36,10 @@
         </nav>
 
         <!-- Research Intro -->
-        <section class="section" style="margin-bottom: var(--space-2xl);">
-            <p style="font-size: 1rem; line-height: 1.9; color: var(--text-secondary); max-width: 680px;">
-                My current research focuses on <strong>evolving multi-agent systems</strong> for autonomous scientific discovery. 
-                I currently develop frameworks that enable LLM-based agents to collaborate, discover tools dynamically, and iteratively improve their workflows through experimental feedback.
+        <section class="section">
+            <p class="research-intro">
+                My current research focuses on <strong>evolving multi-agent systems</strong> for autonomous scientific discovery.
+                I develop frameworks that enable LLM-based agents to collaborate, discover tools dynamically, and iteratively improve their workflows through experimental feedback.
             </p>
         </section>
 
@@ -44,28 +52,28 @@
 
             <article class="paper-card">
                 <h3 class="paper-title">
-                    <a href="https://arxiv.org/abs/2603.28986" target="_blank" rel="noopener" style="opacity: 1;">
+                    <a href="https://arxiv.org/abs/2603.28986" target="_blank" rel="noopener">
                         Mimosa Framework: Toward Evolving Multi-Agent Systems for Scientific Research
                     </a>
                 </h3>
                 <p class="paper-authors">
-                    Martin Legrand, Tao Jiang, Matthieu Feraud, Benjamin Navet, Yousouf Taghzouti, 
+                    Martin Legrand, Tao Jiang, Matthieu Feraud, Benjamin Navet, Yousouf Taghzouti,
                     Fabien Gandon, Elise Dumont, Louis-Félix Nothias
                 </p>
                 <p class="paper-abstract">
-                    Current Autonomous Scientific Research (ASR) systems, despite leveraging large language models (LLMs) 
-                    and agentic architectures, remain constrained by fixed workflows and toolsets that prevent adaptation 
-                    to evolving tasks and environments. We introduce <strong>Mimosa</strong>, an evolving multi-agent framework 
-                    that automatically synthesizes task-specific multi-agent workflows and iteratively refines them through 
-                    experimental feedback. Mimosa leverages the Model Context Protocol (MCP) for dynamic tool discovery, 
-                    generates workflow topologies via a meta-orchestrator, executes subtasks through code-generating agents 
-                    that invoke available tools and scientific software libraries, and scores executions with an LLM-based 
+                    Current Autonomous Scientific Research (ASR) systems, despite leveraging large language models (LLMs)
+                    and agentic architectures, remain constrained by fixed workflows and toolsets that prevent adaptation
+                    to evolving tasks and environments. We introduce <strong>Mimosa</strong>, an evolving multi-agent framework
+                    that automatically synthesizes task-specific multi-agent workflows and iteratively refines them through
+                    experimental feedback. Mimosa leverages the Model Context Protocol (MCP) for dynamic tool discovery,
+                    generates workflow topologies via a meta-orchestrator, executes subtasks through code-generating agents
+                    that invoke available tools and scientific software libraries, and scores executions with an LLM-based
                     judge whose feedback drives workflow refinement.
                 </p>
                 <div class="paper-meta">
                     <span class="paper-badge">Preprint</span>
-                    <span>arXiv · 2025</span>
-                    <span style="margin-left: auto;">
+                    <span>arXiv · 2026</span>
+                    <span class="paper-meta-link">
                         <a href="https://arxiv.org/abs/2603.28986" target="_blank" rel="noopener">View Paper →</a>
                     </span>
                 </div>
@@ -73,30 +81,30 @@
 
             <article class="paper-card">
                 <h3 class="paper-title">
-                    <a href="https://arxiv.org/abs/2510.01724" target="_blank" rel="noopener" style="opacity: 1;">
+                    <a href="https://arxiv.org/abs/2510.01724" target="_blank" rel="noopener">
                         MetaboT: An LLM-based Multi-Agent Framework for Interactive Analysis of Mass Spectrometry Metabolomics Knowledge
                     </a>
                 </h3>
                 <p class="paper-authors">
-                    Madina Bekbergenova, Lucas Pradi, Benjamin Navet, Emma Tysinger, Matthieu Feraud, 
-                    Yousouf Taghzouti, <strong>Martin Legrand</strong>, Tao Jiang, Franck Michel, Yan Zhou Chen, 
-                    Soha Hassoun, Olivier Kirchhoffer, Jean-Luc Wolfender, Florence Mehl, Marco Pagni, 
+                    Madina Bekbergenova, Lucas Pradi, Benjamin Navet, Emma Tysinger, Matthieu Feraud,
+                    Yousouf Taghzouti, <strong>Martin Legrand</strong>, Tao Jiang, Franck Michel, Yan Zhou Chen,
+                    Soha Hassoun, Olivier Kirchhoffer, Jean-Luc Wolfender, Florence Mehl, Marco Pagni,
                     Wout Bittremieux, Fabien Gandon, Louis-Félix Nothias
                 </p>
                 <p class="paper-abstract">
-                    Mass spectrometry metabolomics generates vast amounts of data requiring advanced methods for 
-                    interpretation. Knowledge graphs address these challenges by structuring mass spectrometry data, 
-                    metabolite information, and their relationships into a connected network. However, effective use 
-                    of a knowledge graph demands an in-depth understanding of its ontology and query language syntax. 
-                    To overcome this, we designed <strong>MetaboT</strong>, an AI system utilizing large language models (LLMs) 
-                    to translate user questions into SPARQL semantic query language for operating on knowledge graphs. 
-                    We demonstrate its effectiveness using the Experimental Natural Products Knowledge Graph (ENPKG), 
+                    Mass spectrometry metabolomics generates vast amounts of data requiring advanced methods for
+                    interpretation. Knowledge graphs address these challenges by structuring mass spectrometry data,
+                    metabolite information, and their relationships into a connected network. However, effective use
+                    of a knowledge graph demands an in-depth understanding of its ontology and query language syntax.
+                    To overcome this, we designed <strong>MetaboT</strong>, an AI system utilizing large language models (LLMs)
+                    to translate user questions into SPARQL semantic query language for operating on knowledge graphs.
+                    We demonstrate its effectiveness using the Experimental Natural Products Knowledge Graph (ENPKG),
                     a large-scale public knowledge graph for plant natural products.
                 </p>
                 <div class="paper-meta">
                     <span class="paper-badge">Preprint</span>
                     <span>arXiv · 2025</span>
-                    <span style="margin-left: auto;">
+                    <span class="paper-meta-link">
                         <a href="https://arxiv.org/abs/2510.01724" target="_blank" rel="noopener">View Paper →</a>
                     </span>
                 </div>
@@ -110,27 +118,25 @@
                 <span class="section-subtitle">Current focus areas</span>
             </div>
 
-            <div class="grid-2">
-                <div class="card" style="margin-bottom: var(--space-md);">
-                    <h4 style="font-size: 0.95rem; font-weight: 400;
-                        margin-bottom:
-                        var(--space-sm);">Neuroevolution</h4>
+            <div class="grid-3">
+                <div class="card">
+                    <h4 class="card-subtitle">Neuroevolution</h4>
                     <p class="card-description">
-                    Building Multi-agents systems that evolve.
+                        Building multi-agent systems that evolve their own workflows.
                     </p>
                 </div>
 
-                <div class="card" style="margin-bottom: var(--space-md);">
-                    <h4 style="font-size: 0.95rem; font-weight: 400; margin-bottom: var(--space-sm);">Scientific Discovery AI</h4>
+                <div class="card">
+                    <h4 class="card-subtitle">Scientific Discovery AI</h4>
                     <p class="card-description">
-                        Building Autonomous systems for metabolomics and computational chemistry. 
+                        Building autonomous systems for metabolomics and computational chemistry.
                     </p>
                 </div>
 
-                <div class="card" style="margin-bottom: 0;">
-                    <h4 style="font-size: 0.95rem; font-weight: 400; margin-bottom: var(--space-sm);">Local & Private AI</h4>
+                <div class="card">
+                    <h4 class="card-subtitle">Local & Private AI</h4>
                     <p class="card-description">
-                        Architectures for running capable AI systems on local infrastructure. 
+                        Architectures for running capable AI systems on local infrastructure.
                     </p>
                 </div>
             </div>
@@ -138,7 +144,7 @@
 
         <!-- Footer -->
         <footer class="site-footer">
-            <span class="footer-text">© 2025 Martin Legrand</span>
+            <span class="footer-text">© 2026 Martin Legrand</span>
             <div class="footer-links">
                 <a href="index.html">Portfolio</a>
                 <a href="blog/index.html">Blog</a>
