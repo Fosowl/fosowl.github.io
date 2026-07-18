@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Why neuroevolution may outlast the current AI hype cycle">
+    <meta name="author" content="Martin Legrand">
+    <title>Neuroevolution will thrive when the bubble pop · Martin Legrand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body class="scanlines">
+    <div class="grain-overlay"></div>
+    
+    <div class="container">
+        <!-- Header -->
+        <header class="site-header">
+            <h1 class="site-title"><a href="../index.html" style="opacity: 1;">martin.legrand</a></h1>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="site-nav" aria-label="Main navigation">
+            <a class="nav-link" href="index.html">← All Posts</a>
+            <a class="nav-link" href="../research.html">Research</a>
+            <a class="nav-link" href="https://github.com/Fosowl" target="_blank" rel="noopener">GitHub</a>
+        </nav>
+
+        <!-- Article -->
+        <article>
+            <header class="article-header">
+                <h1 class="article-title">Neuroevolution will thrive again when the bubble pop</h1>
+                <p class="article-meta">Draft. Martin Legrand</p>
+            </header>
+
+            <div class="article-content">
+                <p class="article-lede">
+                    <strong>Neuroevolution</strong> is the branch of AI that trains neural networks not with
+                    gradient descent, but with evolutionary algorithms: populations of networks are mutated,
+                    evaluated, and selected over generations until a capable design emerges. It was once the
+                    main way to optimize both the weights and architectures of networks before backpropagation
+                    took over. Today, it is, I believe, making a quiet comeback in the LLM era. Labs like
+                    <a href="https://sakana.ai/" target="_blank" rel="noopener">Sakana AI</a> are using
+                    evolutionary search to discover model architectures, merge foundation models, and automate
+                    research workflows that pure fine-tuning struggles to explore. The idea is no longer to
+                    replace backpropagation, but to evolve the things gradient descent cannot easily optimize:
+                    topology, composition, and long-horizon strategies.
+                </p>
+
+                <h2>1. The bubble will pop</h2>
+                <p>
+                    This should come as no surprise. Every time US labs claim the best AI model that no one
+                    else can match, an open-weights Chinese model shows up shortly after and beats it. The gap
+                    used to be months; now it is weeks. As I write this, Kimi K3 has just outperformed Fable on
+                    several benchmarks, even though Fable was released only a month earlier.
+                </p>
+                <p>
+                    The American moat is shrinking. US labs still lead on raw compute, but Chinese labs are
+                    winning on efficiency and frugality. As scaling returns diminish—training data runs out,
+                    power grids strain under training loads, and inference costs rise—the efficient approach
+                    catches up. Kimi K3 is exactly the kind of release that might just pop the bubble. The next decade
+                    of AI will be about frugality, efficiency, and open-endedness.
+                </p>
+
+                <h2>2. Frugal will win</h2>
+                <p>
+                    The current approach is becoming too expensive to sustain. Consider the economics:
+                </p>
+                <ul>
+                    <li>OpenAI reportedly lost $21 billion last year on $13 billion in revenue.</li>
+                    <li>Anthropic spends three dollars for every dollar it earns.</li>
+                    <li>The US cloud industry has committed over a trillion dollars to AI infrastructure, yet none of the major AI labs are profitable.</li>
+                    <li>A $100 Claude subscription gives you access to Claude Fable, but the equivalent token cost at list price would run into thousands of dollars.</li>
+                </ul>
+                <p>
+                    Business models like this cannot last. Even if they somehow did, why pay hundreds of
+                    dollars for a model you do not own, with API costs that can destabilize your own economics?
+                </p>
+                <p>
+                    Of course, not everyone has a machine with 512 GB of RAM and four RTX 4090s. But you no
+                    longer need one. With
+                    <a href="https://github.com/JustVugg/colibri" target="_blank" rel="noopener">Colibri</a>,
+                    you can run GLM 5.2—arguably near Fable level—on consumer hardware by using your SSD
+                    directly as memory. It is far slower, but I would rather have a model running at 0.2
+                    tokens per second, 24/7, on my own machine than one running at 20 tokens per second for
+                    $100 a month, asking me to add credits after 30 minutes of usage, and running on someone else’s server.
+                </p>
+                <p>
+                    That was a detour into local AI, which matters, but it is not the full answer. Even with
+                    tools like Colibri, a hundreds-of-gigabyte model crawling along on consumer hardware is
+                    not a satisfying future. These systems are still monsters: they take months and millions
+                    of dollars to train, consume great amounts of power, and remain black boxes you
+                    cannot easily inspect or adapt.
+                </p>
+                <p>
+                    Real frugality cannot just mean “run the same giants on a smaller machine.” It has to mean
+                    building models that need fewer parameters, less data, and less energy in the first place.
+                    This is where we either: (1) push the limits of training and inference optimization techniques,
+                    as well as compression, distillation, and pruning. (2) explore alternative approaches to
+                    architectures design. Or (3) Combine the strenghts of small models together, the latter
+                    is where neuroevolution becomes interesting again.
+                </p>
+
+
+                <h2>3. Why Neuroevolution-inspired methods are relevant for the next age.</h2>
+                <p>
+                    Coming soon...
+                </p>
+
+                <h2>4. The hybrid future</h2>
+                <p>
+                    Coming soon...
+                </p>
+
+                <p class="article-outro">
+                    <strong>Conclusion.</strong> Coming soon...
+                </p>
+            </div>
+        </article>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <span class="footer-text">© 2025 Martin Legrand</span>
+            <div class="footer-links">
+                <a href="../index.html">Portfolio</a>
+                <a href="../research.html">Research</a>
+                <a href="index.html">All Posts</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <script>
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
