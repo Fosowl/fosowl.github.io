@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Why neuroevolution may outlast the current AI hype cycle">
     <meta name="author" content="Martin Legrand">
-    <title>Neuroevolution will thrive when the bubble pop · Martin Legrand</title>
+    <title>Neuroevolution will thrive when the bubble pops · Martin Legrand</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
     <div class="container">
         <!-- Header -->
         <header class="site-header">
-            <h1 class="site-title"><a href="../index.html" style="opacity: 1;">martin.legrand</a></h1>
+            <h1 class="site-title"><a href="../index.html" style="opacity: 1;">martin.legrand // Fosowl</a></h1>
         </header>
 
         <!-- Navigation -->
@@ -30,8 +30,8 @@
         <!-- Article -->
         <article>
             <header class="article-header">
-                <h1 class="article-title">Neuroevolution will thrive again when the bubble pop</h1>
-                <p class="article-meta">Draft. Martin Legrand</p>
+                <h1 class="article-title">Neuroevolution will thrive again when the bubble pops</h1>
+                <p class="article-meta">Draft. 19/07/2026. Martin Legrand</p>
             </header>
 
             <div class="article-content">
@@ -56,65 +56,105 @@
                     several benchmarks, even though Fable was released only a month earlier.
                 </p>
                 <p>
-                    The American moat is shrinking. US labs still lead on raw compute, but Chinese labs are
-                    winning on efficiency and frugality. As scaling returns diminish—training data runs out,
-                    power grids strain under training loads, and inference costs rise—the efficient approach
-                    catches up. Kimi K3 is exactly the kind of release that might just pop the bubble. The next decade
-                    of AI will be about frugality, efficiency, and open-endedness.
+                    Scaling returns are diminishing: training data is running out,
+                    power grids are straining under training loads, and inference costs are rising while companies struggle
+                    to justify their API spending.
+                </p>
+                <p>
+                    Kimi K3 and GLM-5 showed that American labs have no moat: they don't have a secret recipe, they don't have a better architecture, they don't have a better training algorithm.
+                    They use transformers like everyone else. You can't scale forever.
+                    They are just bigger, with diminishing returns from adding more data. The Chinese labs are catching up; should you be surprised? 
+                </p>
+                <p>
+                    This cannot last forever; nothing that cannot be sustained lasts forever.
+                    When the bubble pops, the AI landscape will be littered with the corpses of those labs. And just like with dinosaurs, the survivors will be the smaller ones.
                 </p>
 
                 <h2>2. Frugal will win</h2>
                 <p>
-                    The current approach is becoming too expensive to sustain. Consider the economics:
+                    The current approach is becoming too expensive to sustain. Consider some numbers:
                 </p>
                 <ul>
                     <li>OpenAI reportedly lost $21 billion last year on $13 billion in revenue.</li>
-                    <li>Anthropic spends three dollars for every dollar it earns.</li>
-                    <li>The US cloud industry has committed over a trillion dollars to AI infrastructure, yet none of the major AI labs are profitable.</li>
+                    <li>The US cloud industry has committed over a trillion dollars to AI infrastructure, yet none of the major AI labs are really profitable.</li>
                     <li>A $100 Claude subscription gives you access to Claude Fable, but the equivalent token cost at list price would run into thousands of dollars.</li>
                 </ul>
                 <p>
                     Business models like this cannot last. Even if they somehow did, why pay hundreds of
-                    dollars for a model you do not own, with API costs that can destabilize your own economics?
+                    dollars for a model you do not own, with API costs that can become unsustainable tomorrow?
                 </p>
                 <p>
                     Of course, not everyone has a machine with 512 GB of RAM and four RTX 4090s. But you no
-                    longer need one. With
+                    longer need one. For example, with
                     <a href="https://github.com/JustVugg/colibri" target="_blank" rel="noopener">Colibri</a>,
-                    you can run GLM 5.2—arguably near Fable level—on consumer hardware by using your SSD
+                    you can run GLM 5.2, arguably a near-Fable-level model, on consumer hardware by using your SSD
                     directly as memory. It is far slower, but I would rather have a model running at 0.2
-                    tokens per second, 24/7, on my own machine than one running at 20 tokens per second for
+                    tokens per second, 24/7, on my own machine than a subscription running at 20 tokens per second for
                     $100 a month, asking me to add credits after 30 minutes of usage, and running on someone else’s server.
                 </p>
                 <p>
                     That was a detour into local AI, which matters, but it is not the full answer. Even with
                     tools like Colibri, a hundreds-of-gigabyte model crawling along on consumer hardware is
-                    not a satisfying future. These systems are still monsters: they take months and millions
+                    still unreachable for most of the population. When minutes are needed to generate an answer,
+                    no normie will ever use it, and few businesses would be sustainable. These systems are still monsters: they take months and millions
                     of dollars to train, consume great amounts of power, and remain black boxes you
-                    cannot easily inspect or adapt.
+                    cannot easily inspect and that adapt poorly to your needs.
                 </p>
                 <p>
                     Real frugality cannot just mean “run the same giants on a smaller machine.” It has to mean
                     building models that need fewer parameters, less data, and less energy in the first place.
                     This is where we either: (1) push the limits of training and inference optimization techniques,
-                    as well as compression, distillation, and pruning. (2) explore alternative approaches to
-                    architectures design. Or (3) Combine the strenghts of small models together, the latter
+                    as well as compression, distillation, and pruning; (2) explore alternative approaches to
+                    architecture design; or (3) combine the strengths of all the small models the AI race produced. The latter
                     is where neuroevolution becomes interesting again.
                 </p>
 
 
-                <h2>3. Why Neuroevolution-inspired methods are relevant for the next age.</h2>
+                <h2>3. Optimize, discover or recombine</h2>
                 <p>
-                    Coming soon...
+                    If "run the giants on smaller machines" isn't the answer, then what is? As I see it,
+                    there are three roads: push optimization and compression harder, rethink the architecture from scratch,
+                    or stop building bigger models at all and learn to combine the small ones we already have.
                 </p>
 
-                <h2>4. The hybrid future</h2>
                 <p>
-                    Coming soon...
+                    <strong>Solution 1: squeeze harder.</strong> This is the road China has been driving on; Kimi, DeepSeek, Moonshot, and Qwen have done a lot of impressive work on this front.
+                    Mixture-of-experts, speculative decoding, quantization-friendly training, distillation: they have pushed every one of these techniques to the edge.
+                    Yet, the most efficiency-obsessed labs on the planet still end up shipping trillion-parameter models...
                 </p>
+                <p>
+                    <strong>Solution 2: new architecture.</strong> This is Yann LeCun's bet, and it might be the right one, 20 years from now.
+                    World models, JEPA-style architectures, are systems that learn from video the way children learn from sight.
+                    This is likely how we get AI that understands the world and doesn't tell you to go wash your car by walking to the garage... without your car.
+                    However, the first generation of JEPA will give us better robotics, not superintelligence. And it will take years to even get there.
+                    World models are anything but frugal. By LeCun's own calculation, a four-year-old has absorbed more data through vision than any LLM has ever seen in text.
+                    Video is vastly more token-hungry than text per unit of meaning. This doesn't mean it won't be useful, or even that it can never run on consumer hardware,
+                    but it might take a few years before the hardware allows you to run genuinely useful world models on your laptop or to provide cheap inference.
+                </p>
+
+                <p>
+                    <strong>Solution 3: combine or evolve what we have.</strong>  Few labs are exploring this path, but it is the one I believe will be the most fruitful in the next decade.
+                    The most notorious one on this journey is of course <a href="https://sakana.ai/" target="_blank" rel="noopener">Sakana AI</a>, based in Tokyo,
+                    founded by none other than some of the Transformer architecture's authors, David Ha and Llion Jones.
+                    Sakana AI is using evolutionary search to discover better algorithms, combine the strengths of multiple model architectures, merge foundation models,
+                    and automate research workflows that LLMs alone struggle to explore.
+                    
+                </p>
+
+                <h2>4. The comeback of Neuroevolution</h2>
+
+                <i>In progress...</i>
+
+                <p>
+                </p>
+
+
 
                 <p class="article-outro">
-                    <strong>Conclusion.</strong> Coming soon...
+                    <i>"The future of AI will not consist of a single, gigantic, all-knowing
+                    AI system that requires enormous energy to train, run, and maintain,
+                    but rather a vast collection of small AI systems"</i>
+                    <strong>MIT Neuroevolution book.</strong>
                 </p>
             </div>
         </article>
