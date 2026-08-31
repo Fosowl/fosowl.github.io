@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Why neuroevolution may outlast the current AI hype cycle">
     <meta name="author" content="Martin Legrand">
-    <title>Neuroevolution will thrive when the bubble pops · Martin Legrand</title>
+    <title>Neuroevolution-inspired approach will thrive when the bubble pops · Martin Legrand</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -120,10 +120,10 @@
                 <p>
                     <strong>Solution 1: squeeze harder.</strong> This is the road China has been driving on; Kimi, DeepSeek, Moonshot, and Qwen have done a lot of impressive work on this front.
                     Mixture-of-experts, speculative decoding, quantization-friendly training, distillation: they have pushed every one of these techniques to the edge.
-                    Yet, the most efficiency-obsessed labs on the planet still end up shipping trillion-parameter models...
+                    Yet, the most efficiency-obsessed labs on the planet still end up shipping near trillion (or above) parameters models...
                 </p>
                 <p>
-                    <strong>Solution 2: new architecture.</strong> This is Yann LeCun's bet, and it might be the right one, 20 years from now.
+                    <strong>Solution 2: new architecture.</strong> This is the bet of research such as Yann LeCun's bet, and it might be the right one, 20 years from now.
                     World models, JEPA-style architectures, are systems that learn from video the way children learn from sight.
                     This is likely how we get AI that understands the world and doesn't tell you to go wash your car by walking to the garage... without your car.
                     However, the first generation of JEPA will give us better robotics, not superintelligence. And it will take years to even get there.
@@ -143,12 +143,72 @@
 
                 <h2>4. The comeback of Neuroevolution</h2>
 
-                <i>In progress...</i>
-
                 <p>
+                    Neuroevolution is not coming back to replace backpropagation. It is coming back to optimize
+                    the things gradient descent <em>cannot touch</em>: discrete prompts, model merge recipes,
+                    multi-agent topologies, and coordination strategies. Three lines of work make this case.
                 </p>
 
+                <h3>4.1 Evolving prompts</h3>
 
+                <p>
+                    Microsoft's
+                    <a href="https://arxiv.org/abs/2309.08532" target="_blank" rel="noopener">EvoPrompt</a>
+                    treats prompts as a population: an LLM recombines and mutates parent prompts, and the
+                    fittest survive. Across 31 NLP tasks, evolved prompts beat both human-written and
+                    automatically-generated ones — no fine-tuning, no gradient steps, no weight updates.
+                    DeepMind's
+                    <a href="https://arxiv.org/abs/2309.16797" target="_blank" rel="noopener">PromptBreeder</a>
+                    goes further: it co-evolves task prompts <em>and</em> the mutation-prompt that generates
+                    them, so the system improves its own improvement process over generations. When API credits
+                    become a cost center instead of a write-off, evolving a prompt that yields 90% of
+                    fine-tuned performance for zero training cost will look very attractive.
+                </p>
+
+                <h3>4.2 Evolving model merges</h3>
+
+                <p>
+                    The open-weights ecosystem has produced thousands of specialized models — code, math,
+                    creative writing — none of which individually match frontier models. Weight merging
+                    combines them, but the space of possible merge recipes (which models, what proportions,
+                    which operator?) is vast and non-differentiable. Sakana AI's
+                    <a href="https://arxiv.org/abs/2403.13187" target="_blank" rel="noopener">Evolutionary
+                    Optimization of Model Merging Recipes</a> applies CMA-ES to discover recipes that
+                    outperform any single source model. Combined with
+                    <a href="https://arxiv.org/abs/2306.01708" target="_blank" rel="noopener">TIES-Merging</a>
+                    and
+                    <a href="https://arxiv.org/abs/2311.03099" target="_blank" rel="noopener">DARE</a>
+                    sparsification, evolution navigates a search space no human can. A few GPU-hours of
+                    evolutionary search versus millions of dollars to train from scratch: that is the
+                    frugality argument made concrete.
+                </p>
+
+                <h3>4.3 Evolving coordination</h3>
+
+                <p>
+                    Sakana AI's
+                    <a href="https://arxiv.org/abs/2512.04695" target="_blank" rel="noopener">Trinity</a>
+                    is the clearest example. A 0.6B-parameter coordinator — lighter than some tokenizers —
+                    is evolved with CMA-ES to route queries across multiple LLMs, assigning Thinker, Worker,
+                    or Verifier roles at each turn. Trinity hits 86.2% on LiveCodeBench, beating every model
+                    it orchestrates. The analysis shows evolution <em>dominates</em> RL and imitation learning
+                    in this setting by exploiting structure other optimizers miss.
+                    <a href="https://arxiv.org/abs/2406.14228" target="_blank" rel="noopener">EvoAgent</a>
+                    evolves entire multi-agent teams automatically, and
+                    <a href="https://arxiv.org/abs/2402.16823" target="_blank" rel="noopener">Language Agents
+                    as Optimizable Graphs</a> optimizes agent communication topologies — discrete graph search
+                    where evolution is the natural tool. Hand-designing agent teams is fragile; evolution
+                    discovers patterns in hours that humans miss in weeks. And the coordinator is so small
+                    it runs on a CPU.
+                </p>
+
+                <p>
+                    This is the shape of the comeback. Neuroevolution as the <em>architect</em>: designing
+                    prompts, merging weights, and orchestrating teams of models that gradient descent cannot
+                    reach. When the trillion-dollar training runs stop, the question will not be how to build
+                    a bigger model, but how to make the ones we already have work together. Evolution has
+                    been answering that for four billion years.
+                </p>
 
                 <p class="article-outro">
                     <i>"The future of AI will not consist of a single, gigantic, all-knowing
